@@ -76,3 +76,121 @@ Se qualcosa non è chiaro nelle mie richieste o nel mockup (intenzione di un ele
 ## Tono
 
 Italiano, diretto, professionale ma colloquiale. Niente preamboli del tipo "ottima domanda!". Se sbaglio qualcosa o sto andando in una direzione discutibile, dimmelo onestamente — non sono qui per essere assecondato, sono qui per imparare.
+
+---
+
+# Stato del progetto
+
+_Ultimo aggiornamento: 2026-05-05_
+
+## Stack confermato
+
+- **HTML + CSS + JS vanilla** (no framework, no build tool)
+- **Mobile-first**, single page (long scroll), un solo `index.html`
+- **Dev server**: `live-server` con auto-reload
+- **CSS modulare** con cascade layers `@layer`
+- **Mockup di riferimento**: `jojo-portfolio-mobile-v2.html` (NON modificare — serve solo come reference)
+
+## Struttura cartelle attuale
+
+```
+Portfolio_MatteoBraida/
+├── index.html              ← scheletro semantico (header/main/footer vuoti)
+├── jojo-portfolio-mobile-v2.html   ← MOCKUP reference, non toccare
+├── assets/
+│   ├── images/             (vuota)
+│   └── icons/              (vuota)
+├── css/
+│   ├── main.css            ← orchestratore: dichiara @layer + @import
+│   ├── reset.css           (vuoto)
+│   ├── tokens.css          (vuoto)
+│   ├── base.css            (vuoto)
+│   ├── layout.css          (vuoto)
+│   └── components.css      (vuoto)
+└── js/
+    └── script.js           (vuoto)
+```
+
+Layer order in `main.css`: `reset, tokens, base, layout, components` (utilities rimosso, da aggiungere solo se serve).
+
+## Decisioni di design — "JoJo-light"
+
+L'utente ama il tema JoJo del mockup ma ha scelto di **abbassarlo** per non alienare recruiter generici:
+
+**Mantieni**:
+- Stile visivo neo-brutalist comic (bordi neri 3-4px, box-shadow offset nere, rotazioni leggere -2°/1°)
+- Palette saturata (cream/paper sfondo + accent: yellow, pink, blue, purple, orange, green, red, lavender)
+- Font: Bangers (titoli urlati), Comic Neue (corpo), Permanent Marker (quote/decorativi). **Niente Poppins** (era nel mockup ma non usato)
+
+**Rimuovi**:
+- Lessico esplicito JoJo: no "Stand", no "Stand User", no "ORA ORA ORA", no "YARE YARE"
+- Onomatopee giapponesi (ゴゴゴ, ドドド, バァン) — almeno nei testi visibili. Eventuali residui decorativi vanno wrappati `lang="ja"`.
+- Quote di personaggi (es. Bruno Bucciarati nel contact)
+- Titoli progetti tipo "Star Platinum: The Web", "Crazy Diamond: Fix" → titoli reali
+- Timeline "ARC 1/2/3" → rinominare (es. "Inizio / Crescita / Oggi")
+
+## Decisioni di contenuto
+
+| Aspetto | Decisione |
+|---|---|
+| Card progetti | Solo testo + link a repo GitHub, **no screenshot** per ora |
+| Avatar | Placeholder ora, foto reale aggiunta a lavori finiti |
+| Progetti al lancio | 1 reale + 2 card "Coming soon" stilizzate |
+| Skills | Solo cose padroneggiate o effettivamente viste/usate (lista da definire prima dello step 7) |
+| Contatti | mailto diretto (NO obfuscation Cloudflare), GitHub, LinkedIn — icone SVG dei brand, non unicode |
+| Indirizzi reali | L'utente li inserirà in fase implementazione |
+| Menu mobile v1 | **Drawer laterale** da destra |
+| Zipper menu | Rimandato a polish finale; possibile richiesta di assistenza diretta |
+
+## Priorità apprendimento
+
+L'utente ha **poca esperienza con animazioni CSS/JS** ed è qui prima di tutto per imparare. Quando c'è un trade-off tra "veloce" e "didatticamente ricco", scegliere il secondo. Spiegare il *perché* delle scelte tecniche, sempre.
+
+## Audit a11y / UX da non dimenticare (dal mockup originale)
+
+Tutti questi problemi del mockup vanno risolti in fase implementazione:
+
+- Contrasti dubbi su pills (yellow/blue/green con testo nero) e card-type pink — verificare WCAG AA
+- Stati `:focus-visible` mancanti ovunque
+- `prefers-reduced-motion` ignorato (zipper, wobble infinito, reveal) — va rispettato
+- Hamburger senza `aria-expanded`, drawer/zipper senza `role="dialog"` + `aria-modal`
+- Niente focus trap, niente ESC-to-close, niente focus return
+- Caratteri giapponesi residui senza `lang="ja"`
+- Heading hierarchy zoppa (Skills usa h3 senza h2)
+- Animazioni infinite drenano batteria
+- Email obfuscata via Cloudflare (`/cdn-cgi/l/email-protection`) — rimuovere, usare mailto diretto
+- Icone unicode generiche (`✉ ⌥ ◆`) — sostituire con SVG dei brand
+- Mancano: `<meta name="description">`, OG tags, favicon, skip link, alt text
+- Nav con scroll-snap progetti senza indicatori (dots/frecce) — aggiungere
+
+## Stato implementazione
+
+| # | Task | Status |
+|---|---|---|
+| 1 | Setup iniziale progetto | ✅ Completato |
+| 2 | CSS reset e tokens (variabili) | ⏳ **Prossimo step** |
+| 3 | Tipografia base | Pending |
+| 4 | Header + nav con drawer mobile | Pending |
+| 5 | Sezione Hero | Pending |
+| 6 | Sezione Projects con carosello | Pending |
+| 7 | Sezione Skills | Pending |
+| 8 | Sezione About con timeline | Pending |
+| 9 | Sezione Contact | Pending |
+| 10 | Footer | Pending |
+| 11 | Responsive desktop | Pending |
+| 12 | Animazioni base | Pending |
+| 13 | Accessibilità | Pending |
+| 14 | SEO e meta tags | Pending |
+| 15 | Polish: animazioni decorative e zipper | Pending |
+
+## Punti aperti da affrontare
+
+- **Title page** dice "Fullstack Web Developer" — verificare con l'utente se è davvero fullstack o solo web dev (impatto credibilità a colloquio)
+- **`js/script.js`** mantenuto al posto di `main.js` (scelta utente)
+- **`defer` vs `async`** sullo `<script>` — concetto da introdurre come parte dello step finale o quando rilevante
+- **Lista skill onesta** da definire insieme prima dello step 7
+- **Copy hero** da riscrivere in JoJo-light prima dello step 5
+
+## Workflow concordato per l'implementazione
+
+Per ogni sezione: l'utente scrive HTML e CSS, Claude guida con concetti / pseudocodice / riferimenti MDN, poi review prima di passare alla successiva. Mai scrivere codice reale al posto suo (vedi "Regola fondamentale" sopra).
