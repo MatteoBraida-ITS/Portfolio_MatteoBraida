@@ -89,26 +89,25 @@ _Ultimo aggiornamento: 2026-05-05_
 - **Mobile-first**, single page (long scroll), un solo `index.html`
 - **Dev server**: `live-server` con auto-reload
 - **CSS modulare** con cascade layers `@layer`
-- **Mockup di riferimento**: `jojo-portfolio-mobile-v2.html` (NON modificare — serve solo come reference)
+- **Mockup di riferimento**: non presente nel repo (era `jojo-portfolio-mobile-v2.html`, file eliminato/mai committato)
 
 ## Struttura cartelle attuale
 
 ```
 Portfolio_MatteoBraida/
-├── index.html              ← scheletro semantico (header/main/footer vuoti)
-├── jojo-portfolio-mobile-v2.html   ← MOCKUP reference, non toccare
+├── index.html              ← header completo con drawer mobile
 ├── assets/
 │   ├── images/             (vuota)
 │   └── icons/              (vuota)
 ├── css/
 │   ├── main.css            ← orchestratore: dichiara @layer + @import
-│   ├── reset.css           (vuoto)
-│   ├── tokens.css          (vuoto)
-│   ├── base.css            (vuoto)
-│   ├── layout.css          (vuoto)
-│   └── components.css      (vuoto)
+│   ├── reset.css           ← completo
+│   ├── tokens.css          ← completo
+│   ├── base.css            ← completo
+│   ├── layout.css          ← .container e section padding (base)
+│   └── components.css      ← header + drawer mobile
 └── js/
-    └── script.js           (vuoto)
+    └── main.js             ← toggle drawer con aria-expanded
 ```
 
 Layer order in `main.css`: `reset, tokens, base, layout, components` (utilities rimosso, da aggiungere solo se serve).
@@ -120,7 +119,7 @@ L'utente ama il tema JoJo del mockup ma ha scelto di **abbassarlo** per non alie
 **Mantieni**:
 - Stile visivo neo-brutalist comic (bordi neri 3-4px, box-shadow offset nere, rotazioni leggere -2°/1°)
 - Palette saturata (cream/paper sfondo + accent: yellow, pink, blue, purple, orange, green, red, lavender)
-- Font: Bangers (titoli urlati), Comic Neue (corpo), Permanent Marker (quote/decorativi). **Niente Poppins** (era nel mockup ma non usato)
+- Font: **Bangers** (titoli display), **Figtree** (corpo — sostituisce Comic Neue, scelta utente), **Permanent Marker** (quote/decorativi). Niente Poppins.
 
 **Rimuovi**:
 - Lessico esplicito JoJo: no "Stand", no "Stand User", no "ORA ORA ORA", no "YARE YARE"
@@ -168,10 +167,10 @@ Tutti questi problemi del mockup vanno risolti in fase implementazione:
 | # | Task | Status |
 |---|---|---|
 | 1 | Setup iniziale progetto | ✅ Completato |
-| 2 | CSS reset e tokens (variabili) | ⏳ **Prossimo step** |
-| 3 | Tipografia base | Pending |
-| 4 | Header + nav con drawer mobile | Pending |
-| 5 | Sezione Hero | Pending |
+| 2 | CSS reset e tokens (variabili) | ✅ Completato |
+| 3 | Tipografia base | ✅ Completato |
+| 4 | Header + nav con drawer mobile | ✅ Completato |
+| 5 | Sezione Hero | ⏳ **Prossimo step** |
 | 6 | Sezione Projects con carosello | Pending |
 | 7 | Sezione Skills | Pending |
 | 8 | Sezione About con timeline | Pending |
@@ -186,10 +185,12 @@ Tutti questi problemi del mockup vanno risolti in fase implementazione:
 ## Punti aperti da affrontare
 
 - **Title page** dice "Fullstack Web Developer" — verificare con l'utente se è davvero fullstack o solo web dev (impatto credibilità a colloquio)
-- **`js/script.js`** mantenuto al posto di `main.js` (scelta utente)
+- **Script**: rinominato in `main.js` (non più `script.js`)
 - **`defer` vs `async`** sullo `<script>` — concetto da introdurre come parte dello step finale o quando rilevante
 - **Lista skill onesta** da definire insieme prima dello step 7
-- **Copy hero** da riscrivere in JoJo-light prima dello step 5
+- **Copy hero** da definire prima dello step 5
+- **Drawer a11y incompleta**: mancano focus trap, ESC-to-close, focus return, `role="dialog"` + `aria-modal` — da completare allo step 13
+- **Icona hamburger SVG** — attualmente è testo "hamburger", da sostituire con SVG al polish finale
 
 ## Workflow concordato per l'implementazione
 
