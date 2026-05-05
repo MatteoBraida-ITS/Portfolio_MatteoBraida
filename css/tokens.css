@@ -1,0 +1,47 @@
+:root {
+  /* Colors — base */
+  --color-bg: #f5f0e8;
+  --color-ink: #0d0d0d;
+
+  /* Colors — accent */
+  --color-yellow: #f5c800;
+  --color-pink: #f25c8a;
+  --color-blue: #2f7ef5;
+  --color-purple: #7c3aed;
+  --color-orange: #f5720a;
+  --color-green: #16a34a;
+  --color-red: #dc2626;
+  --color-lavender: #c4b5fd;
+
+  /* Typography */
+  --font-display: "Bangers", cursive;
+  --font-body: "Comic Neue", cursive;
+  --font-marker: "Permanent Marker", cursive;
+
+  /* Border */
+  --border-width: 3px;
+  --border: var(--border-width) solid var(--color-ink);
+
+  /* Shadow — offset nera stile neo-brutalist */
+  --shadow-sm: 3px 3px 0 var(--color-ink);
+  --shadow-md: 5px 5px 0 var(--color-ink);
+  --shadow-lg: 8px 8px 0 var(--color-ink);
+
+  /* Rotazioni decorative */
+  --rotate-neg: -2deg;
+  --rotate-pos: 1deg;
+
+  /* Spacing — scala 4px */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}

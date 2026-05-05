@@ -1,0 +1,36 @@
+:root {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.5;
+}
+
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.1ms;
+    animation-delay: 0.1ms;
+    transition-duration: 0.1ms;
+  }
+}
