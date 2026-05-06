@@ -17,10 +17,12 @@ header .container {
 
 .logo {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2rem;
+  font-weight: 400;
+  font-size: 3rem;
   text-decoration: none;
-  text-shadow: 2px 2px 0 var(--color-ink);
+  -webkit-text-stroke: 3px var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: 3px 2px 0 var(--color-ink);
   color: var(--color-yellow);
 }
 
@@ -61,9 +63,9 @@ header button {
   flex-direction: column;
   justify-content: center;
   gap: 4px;
-  width: 36px;
-  height: 30px;
-  padding: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
   background-color: var(--color-yellow);
   border: var(--border);
   box-shadow: var(--shadow-sm);
