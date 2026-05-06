@@ -4,8 +4,8 @@
   --color-ink: #0d0d0d;
 
   /* Colors — accent */
-  --color-yellow: #f5c800;
-  --color-pink: #f25c8a;
+  --color-yellow: #ffec00;
+  --color-pink: #e58b7f;
   --color-blue: #2f7ef5;
   --color-purple: #7c3aed;
   --color-orange: #f5720a;
@@ -14,9 +14,9 @@
   --color-lavender: #c4b5fd;
 
   /* Typography */
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Figtree", sans-serif;
-  --font-marker: "Permanent Marker", cursive;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Lora", serif;
+  --font-reserve: "Inter", sans-serif;
 
   /* Border */
   --border-width: 3px;

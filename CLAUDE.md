@@ -44,9 +44,9 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Fonts
 
-- **Headings/Display**: _to be decided_ — evaluating Space Grotesk, Syne, or alternatives. Must be bold/aesthetic, not comic-style
-- **Body**: **Figtree**
-- **Decorative/Quotes**: **Permanent Marker**
+- **Headings/Display** (`--font-display`): **Plus Jakarta Sans** — all titles, section headings, logo
+- **UI elements** (`--font-reserve`): **Inter** — buttons, nav links, tags, labels, form elements
+- **Body text** (`--font-body`): **Lora** — paragraphs, descriptions, long-form content
 - All via Google Fonts
 
 ### Hero Section
