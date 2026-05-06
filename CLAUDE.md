@@ -1,197 +1,154 @@
 # CLAUDE.md
 
-Linee guida per Claude in questo progetto. Leggi questo file all'inizio di ogni sessione e attieniti rigorosamente a quanto descritto.
+Read this file at the start of every session. Follow these guidelines strictly.
 
-## Contesto del progetto
+## Project Context
 
-L'obiettivo è ricreare un sito web a partire da un **mockup** che ti verrà fornito. Lo sviluppatore (io) sta imparando e vuole scrivere il codice in prima persona. Il tuo ruolo è quello di **mentore tecnico**, non di esecutore.
+This is a **personal portfolio website** for Matteo Braida. The project already exists (folder structure, basic setup), but we are doing a **full visual restyling** towards a **neo-brutalism** aesthetic.
 
-Lo stack tecnologico **non è ancora deciso**: lo sceglieremo insieme dopo aver analizzato il mockup, valutando complessità, interattività richiesta, e i miei obiettivi di apprendimento.
+Reference: [neobrutalism.dev](https://www.neobrutalism.dev/)
 
-## Regola fondamentale: niente codice reale
-
-**Non scrivere codice eseguibile/reale al posto mio. Mai.** Nemmeno frammenti, nemmeno "tanto è breve", nemmeno se sembra ovvio.
-
-Cosa puoi fare:
-
-- Spiegazioni testuali dei concetti, dei pattern, delle scelte tecniche
-- Pseudocodice ad alto livello (es. `// per ogni elemento della lista, applica una classe se è attivo`)
-- Diagrammi, schemi mentali, descrizione della struttura dei file
-- Riferimenti a documentazione, API, metodi specifici (con il nome, ma senza scriverne l'implementazione)
-- Indicarmi gli errori nel mio codice e spiegarmi _perché_ sono errori, lasciando a me la correzione
-
-Cosa **non** devi fare:
-
-- Scrivere file completi (HTML, CSS, JS, JSX, componenti, configurazioni, ecc.)
-- Scrivere funzioni o blocchi di codice in linguaggio reale
-- "Esempi rapidi" in sintassi reale che io possa copiare e incollare
-- Completare automaticamente parti che ho lasciato in sospeso
-
-Se sei tentato di scrivere codice perché "è più veloce spiegare così", **fermati e descrivi a parole**. Se ti sembra impossibile spiegare senza codice, dimmelo esplicitamente e chiedimi il permesso per fare un'eccezione su quel punto specifico.
-
-### Eccezione esplicita
-
-Posso autorizzarti a scrivere codice reale dicendo chiaramente cose come _"scrivimi tu questo pezzo"_, _"fammi vedere il codice"_, _"ok puoi scriverlo"_. In assenza di un'autorizzazione del genere, **assumi sempre che la regola valga**.
-
-## Sul mockup: critica costruttiva attiva
-
-Voglio che tu sia **molto critico** sul mockup fornito. Quando lo analizziamo, segnalami spontaneamente:
-
-- **Problemi di UX**: flussi poco chiari, gerarchia visiva debole, elementi che confondono l'utente, call-to-action poco visibili
-- **Problemi di accessibilità**: contrasti insufficienti, dimensioni del testo, target tappabili troppo piccoli, mancanza di stati focus, struttura semantica problematica, navigazione da tastiera, screen reader
-- **Problemi di layout**: incoerenze nelle spaziature, allineamenti sbagliati, scelte tipografiche discutibili, palette colori che non funziona, comportamento responsive ambiguo
-- **Problemi tecnici di fattibilità**: elementi che sarebbero costosi/complessi da implementare senza un buon motivo, scelte che vincolano lo stack
-- **Cose che mancano**: stati di errore, stati vuoti, loading, feedback alle azioni dell'utente, breakpoint mobile/tablet se non specificati
-
-Quando segnali un problema, struttura il commento così:
-
-1. **Cosa** noti (descrizione neutra)
-2. **Perché** è un problema (riferito a principi UX/a11y/design, non opinioni)
-3. **Come** si potrebbe migliorare (una o più opzioni, lasciando a me la decisione)
-
-Non aspettare che te lo chieda: se vedi qualcosa, dillo subito.
-
-## Workflow di lavoro
-
-1. **Analisi del mockup**: lo guardiamo insieme, tu mi fai notare cosa vedi (struttura, componenti ricorrenti, criticità)
-2. **Scelta dello stack**: discutiamo pro e contro in base a ciò che il mockup richiede
-3. **Pianificazione**: definiamo struttura cartelle, componenti, ordine di implementazione
-4. **Implementazione**: scrivo io, tu mi guidi e rispondi a domande puntuali
-5. **Review**: ti mostro il codice, mi dai feedback, io itero
-
-In ogni fase: se hai dubbi, **chiedi**. Meglio una domanda in più che un'assunzione sbagliata.
-
-## Istruzioni di Risposta e Ottimizzazione Token
-
-- **Sii sintetico:** Rispondi in modo diretto ed essenziale. Evita preamboli, saluti o spiegazioni prolisse a meno che non siano esplicitamente richieste.
-- **Output essenziale:** Fornisci solo il codice necessario o la risposta diretta.
-- **Risparmio Token:** Privilegia la brevità per mantenere basso il consumo di token (sia in input che in output).
-- **Formattazione:** Usa liste puntate e formattazione markdown chiara invece di lunghi paragrafi descrittivi.
-- **Mostra, non raccontare:** Preferisci mostrare il codice modificato rispetto a spiegare a parole cosa è stato fatto.
-
-## Domande prima di assumere
-
-Se qualcosa non è chiaro nelle mie richieste o nel mockup (intenzione di un elemento, comportamento di un'interazione, target del sito, vincoli tecnici), **chiedi prima di procedere**. Non riempire i vuoti con assunzioni tue.
-
-## Tono
-
-Italiano, diretto, professionale ma colloquiale. Niente preamboli del tipo "ottima domanda!". Se sbaglio qualcosa o sto andando in una direzione discutibile, dimmelo onestamente — non sono qui per essere assecondato, sono qui per imparare.
-
----
-
-# Stato del progetto
-
-_Ultimo aggiornamento: 2026-05-05_
-
-## Stack confermato
+### Tech Stack
 
 - **HTML + CSS + JS vanilla** (no framework, no build tool)
-- **Mobile-first**, single page (long scroll), un solo `index.html`
-- **Dev server**: `live-server` con auto-reload
-- **CSS modulare** con cascade layers `@layer`
-- **Mockup di riferimento**: non presente nel repo (era `jojo-portfolio-mobile-v2.html`, file eliminato/mai committato)
+- **Mobile-first**, single page (long scroll), single `index.html`
+- **Dev server**: `live-server` with auto-reload
+- **CSS**: modular with cascade layers (`@layer`)
+- **GSAP 3.x** (GreenSock) for animations, loaded via CDN. Plugins (ScrollTrigger, etc.) added as needed during development.
 
-## Struttura cartelle attuale
+## Your Role
+
+You are a **hands-on coding partner**, not just a mentor. You **can and should write code** — but you must always **explain what you're doing and why**. The developer (me) is learning and wants to understand every choice.
+
+### Rules
+
+- **Always explain**: before or while writing code, explain the reasoning — what pattern you're using, why this approach, what it achieves.
+- **If I don't understand**: help me understand. Break it down, use analogies, reference docs. Don't move on until I'm clear.
+- **Ask before assuming**: if something is ambiguous (intent, behavior, constraints), ask. Don't fill gaps with guesses.
+- **Be direct**: Italian directness, no fluff. No "great question!" preambles. If I'm going in a wrong direction, tell me honestly.
+- **Be concise**: favor bullet points and clear markdown over long paragraphs. Keep token usage efficient.
+
+## Visual Style — Neo-Brutalism
+
+The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](https://www.neobrutalism.dev/):
+
+### Core Visual Rules
+
+- **Borders**: thick black borders (2-4px solid `#000`) on interactive and container elements
+- **Shadows**: hard offset box-shadows (e.g. `4px 4px 0 #000`), no blur
+- **Shapes**: bold geometric forms. Starburst shapes are valid neo-brutalist decorative elements (as seen on neobrutalism.dev)
+- **Colors**: saturated, fearless palette. Specific colors are **not defined here** — they are managed directly in `css/tokens.css` by the developer
+- **Typography**: bold, high-impact headings. Body text clean and readable
+- **Layout**: asymmetry welcome, grid-breaking elements, generous negative space or controlled density
+- **Attitude**: embrace "uncomfortable" design elements — neo-brutalism is intentionally bold and unconventional
+
+### Fonts
+
+- **Headings/Display**: _to be decided_ — evaluating Space Grotesk, Syne, or alternatives. Must be bold/aesthetic, not comic-style
+- **Body**: **Figtree**
+- **Decorative/Quotes**: **Permanent Marker**
+- All via Google Fonts
+
+### Hero Section
+
+- Name ("Matteo Braida") in display font
+- Tagline: "Trasformo sogni in solide realtà."
+- Two CTA buttons: PROGETTI + CONTATTI
+- Pink/salmon background
+- Reference: `assets/design/figma/Mockup_Mobile.png`
+
+### What NOT to Do
+
+- No comic-book/pop-art aesthetic (no Bangers font, no cartoon outlines, no manga references)
+- No JoJo's Bizarre Adventure references (no "Stand", no onomatopoeia, no character quotes, no Japanese text)
+- No overly rounded pill-shaped buttons — prefer neo-brutalist sharp or low-radius rectangles
+- No blurred/soft shadows — always hard offset
+- No generic "safe" design — this is neo-brutalism, be bold
+
+## Content Decisions
+
+| Aspect | Decision |
+|---|---|
+| Project cards | Text + GitHub repo link only, **no screenshots** for now |
+| Avatar | Placeholder for now, real photo added when site is finished |
+| Projects at launch | 1 real + 2 "Coming soon" styled cards |
+| Skills | Only technologies actually learned/used (list TBD before implementation) |
+| Contact | Direct mailto (no obfuscation), GitHub, LinkedIn — brand SVG icons |
+| Real addresses/links | Developer inserts these during implementation |
+| Mobile menu v1 | **Side drawer** from right |
+
+## Accessibility & UX Audit (from original mockup)
+
+These issues must be addressed during implementation:
+
+- Verify WCAG AA contrast on all colored elements with dark text
+- `:focus-visible` states on all interactive elements
+- `prefers-reduced-motion`: respect it — disable/reduce all GSAP animations and CSS transitions
+- Drawer: `role="dialog"` + `aria-modal`, focus trap, ESC-to-close, focus return
+- Hamburger: proper `aria-expanded` toggle
+- Heading hierarchy must be correct (sequential, no skipped levels)
+- Infinite animations must not drain battery — use `will-change` sparingly, pause off-screen
+- Required meta: `<meta name="description">`, OG tags, favicon, skip link, proper alt text
+- Scroll-based navigation needs visible indicators (dots/arrows)
+- Any decorative Japanese text (if any remains) must have `lang="ja"`
+
+## Project Structure
 
 ```
 Portfolio_MatteoBraida/
-├── index.html              ← header completo con drawer mobile
+├── index.html
 ├── assets/
-│   ├── images/             (vuota)
-│   └── icons/              (vuota)
+│   ├── images/
+│   └── icons/
 ├── css/
-│   ├── main.css            ← orchestratore: dichiara @layer + @import
-│   ├── reset.css           ← completo
-│   ├── tokens.css          ← completo
-│   ├── base.css            ← completo
-│   ├── layout.css          ← .container e section padding (base)
-│   └── components.css      ← header + drawer mobile
+│   ├── main.css            ← orchestrator: @layer declarations + @import
+│   ├── reset.css
+│   ├── tokens.css           ← design tokens (colors managed by developer)
+│   ├── base.css
+│   ├── layout.css
+│   └── components.css
+├── assets/
+│   └── design/
+│       └── figma/           ← Figma exports (PNG), visual reference for implementation
 └── js/
-    └── main.js             ← toggle drawer con aria-expanded
+    └── main.js
 ```
 
-Layer order in `main.css`: `reset, tokens, base, layout, components` (utilities rimosso, da aggiungere solo se serve).
+When implementing a section, **always check `assets/design/figma/`** for the latest visual reference before writing code.
 
-## Decisioni di design — "JoJo-light"
+Layer order in `main.css`: `reset, tokens, base, layout, components` (utilities layer added only if needed).
 
-L'utente ama il tema JoJo del mockup ma ha scelto di **abbassarlo** per non alienare recruiter generici:
+## Restyling Task List
 
-**Mantieni**:
-- Stile visivo neo-brutalist comic (bordi neri 3-4px, box-shadow offset nere, rotazioni leggere -2°/1°)
-- Palette saturata (cream/paper sfondo + accent: yellow, pink, blue, purple, orange, green, red, lavender)
-- Font: **Bangers** (titoli display), **Figtree** (corpo — sostituisce Comic Neue, scelta utente), **Permanent Marker** (quote/decorativi). Niente Poppins.
-
-**Rimuovi**:
-- Lessico esplicito JoJo: no "Stand", no "Stand User", no "ORA ORA ORA", no "YARE YARE"
-- Onomatopee giapponesi (ゴゴゴ, ドドド, バァン) — almeno nei testi visibili. Eventuali residui decorativi vanno wrappati `lang="ja"`.
-- Quote di personaggi (es. Bruno Bucciarati nel contact)
-- Titoli progetti tipo "Star Platinum: The Web", "Crazy Diamond: Fix" → titoli reali
-- Timeline "ARC 1/2/3" → rinominare (es. "Inizio / Crescita / Oggi")
-
-## Decisioni di contenuto
-
-| Aspetto | Decisione |
-|---|---|
-| Card progetti | Solo testo + link a repo GitHub, **no screenshot** per ora |
-| Avatar | Placeholder ora, foto reale aggiunta a lavori finiti |
-| Progetti al lancio | 1 reale + 2 card "Coming soon" stilizzate |
-| Skills | Solo cose padroneggiate o effettivamente viste/usate (lista da definire prima dello step 7) |
-| Contatti | mailto diretto (NO obfuscation Cloudflare), GitHub, LinkedIn — icone SVG dei brand, non unicode |
-| Indirizzi reali | L'utente li inserirà in fase implementazione |
-| Menu mobile v1 | **Drawer laterale** da destra |
-| Zipper menu | Rimandato a polish finale; possibile richiesta di assistenza diretta |
-
-## Priorità apprendimento
-
-L'utente ha **poca esperienza con animazioni CSS/JS** ed è qui prima di tutto per imparare. Quando c'è un trade-off tra "veloce" e "didatticamente ricco", scegliere il secondo. Spiegare il *perché* delle scelte tecniche, sempre.
-
-## Audit a11y / UX da non dimenticare (dal mockup originale)
-
-Tutti questi problemi del mockup vanno risolti in fase implementazione:
-
-- Contrasti dubbi su pills (yellow/blue/green con testo nero) e card-type pink — verificare WCAG AA
-- Stati `:focus-visible` mancanti ovunque
-- `prefers-reduced-motion` ignorato (zipper, wobble infinito, reveal) — va rispettato
-- Hamburger senza `aria-expanded`, drawer/zipper senza `role="dialog"` + `aria-modal`
-- Niente focus trap, niente ESC-to-close, niente focus return
-- Caratteri giapponesi residui senza `lang="ja"`
-- Heading hierarchy zoppa (Skills usa h3 senza h2)
-- Animazioni infinite drenano batteria
-- Email obfuscata via Cloudflare (`/cdn-cgi/l/email-protection`) — rimuovere, usare mailto diretto
-- Icone unicode generiche (`✉ ⌥ ◆`) — sostituire con SVG dei brand
-- Mancano: `<meta name="description">`, OG tags, favicon, skip link, alt text
-- Nav con scroll-snap progetti senza indicatori (dots/frecce) — aggiungere
-
-## Stato implementazione
+The project structure exists but all visual implementation is being redone. Treat this as a fresh start for styling and content.
 
 | # | Task | Status |
 |---|---|---|
-| 1 | Setup iniziale progetto | ✅ Completato |
-| 2 | CSS reset e tokens (variabili) | ✅ Completato |
-| 3 | Tipografia base | ✅ Completato |
-| 4 | Header + nav con drawer mobile | ✅ Completato |
-| 5 | Sezione Hero | ⏳ **Prossimo step** |
-| 6 | Sezione Projects con carosello | Pending |
-| 7 | Sezione Skills | Pending |
-| 8 | Sezione About con timeline | Pending |
-| 9 | Sezione Contact | Pending |
-| 10 | Footer | Pending |
-| 11 | Responsive desktop | Pending |
-| 12 | Animazioni base | Pending |
-| 13 | Accessibilità | Pending |
-| 14 | SEO e meta tags | Pending |
-| 15 | Polish: animazioni decorative e zipper | Pending |
+| 1 | Update tokens.css with neo-brutalist design tokens | Done |
+| 2 | Revise base typography and global styles | Done |
+| 3 | Restyle header + nav + drawer (neo-brutalist) | Done |
+| 4 | Hero section with rotating starburst SVG (GSAP) | ⏳ In progress (HTML structure done, starburst + GSAP pending) |
+| 5 | Projects section with cards | Pending |
+| 6 | Skills section | Pending |
+| 7 | About section with timeline | Pending |
+| 8 | Contact section | Pending |
+| 9 | Footer | Pending |
+| 10 | Responsive desktop adaptation | Pending |
+| 11 | GSAP animations (scroll-triggered, micro-interactions) | Pending |
+| 12 | Accessibility pass | Pending |
+| 13 | SEO and meta tags | Pending |
+| 14 | Final polish | Pending |
 
-## Punti aperti da affrontare
+## Open Questions
 
-- **Title page** dice "Fullstack Web Developer" — verificare con l'utente se è davvero fullstack o solo web dev (impatto credibilità a colloquio)
-- **Script**: rinominato in `main.js` (non più `script.js`)
-- **`defer` vs `async`** sullo `<script>` — concetto da introdurre come parte dello step finale o quando rilevante
-- **Lista skill onesta** da definire insieme prima dello step 7
-- **Copy hero** da definire prima dello step 5
-- **Drawer a11y incompleta**: mancano focus trap, ESC-to-close, focus return, `role="dialog"` + `aria-modal` — da completare allo step 13
-- **Icona hamburger SVG** — attualmente è testo "hamburger", da sostituire con SVG al polish finale
+- **Title**: "Fullstack Web Developer" — verify if accurate or should be just "Web Developer" (credibility matters in interviews)
+- **Heading font**: final choice TBD (Space Grotesk, Syne, or other)
+- **Skills list**: define honest list before implementing skills section
+- **Hero copy**: define before implementing hero section
+- **`defer` vs `async`** on script tag — introduce when relevant
+- **Drawer a11y**: focus trap, ESC-to-close, focus return, `role="dialog"` — address at accessibility pass
+- **Hamburger icon**: currently text, replace with SVG
 
-## Workflow concordato per l'implementazione
+## Learning Priority
 
-Per ogni sezione: l'utente scrive HTML e CSS, Claude guida con concetti / pseudocodice / riferimenti MDN, poi review prima di passare alla successiva. Mai scrivere codice reale al posto suo (vedi "Regola fondamentale" sopra).
+The developer has **limited experience with CSS animations and GSAP**. When there's a trade-off between "fast" and "educational", choose educational. Always explain the *why* behind technical choices.

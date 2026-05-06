@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Matteo Braida - Fullstack Web Developer</title>
+    <title>Matteo Braida - Web Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bangers&family=Figtree:ital,wght@0,300..900;1,300..900&family=Permanent+Marker&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
@@ -15,42 +15,66 @@
   <body>
     <header>
       <div class="container">
-        <a href="#hero">BRAIDAMATTEO.COM</a>
+        <a href="#hero" class="logo">MB</a>
         <nav aria-label="Navigazione principale" id="nav-drawer">
           <ul role="list">
             <li><a href="#hero">Home</a></li>
             <li><a href="#projects">Progetti</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#about">Su di me</a></li>
             <li><a href="#contact">Contatti</a></li>
           </ul>
         </nav>
         <button aria-expanded="false" aria-controls="nav-drawer">
-          hamburger
+          ☰
         </button>
       </div>
     </header>
     <main>
       <section id="hero">
         <div class="hero-inner">
-          <div class="badge">★ Fullstack Web Developer ★</div>
-          <div class="avatar">FOTO QUI</div>
-          <h1 class="name">
-            <span aria-hidden="true" class="name-shadow">Matteo Braida</span>
-            Matteo Braida
-          </h1>
-          <p class="role">Fullstack web developer</p>
-          <p class="description">
-            Trasformo idee in interfacce web curate, accessibili e veloci. Ogni
-            progetto è un'occasione per imparare qualcosa di nuovo.
-          </p>
+          <h1 class="name">Matteo<br />Braida</h1>
+          <p class="tagline">Trasformo sogni in solide realtà.</p>
           <div class="cta">
-            <a href="#projects">Progetti</a> <a href="#contact">Contattami</a>
+            <a href="#projects" class="btn">PROGETTI</a>
+            <a href="#contact" class="btn">CONTATTI</a>
           </div>
         </div>
       </section>
+
+      <section id="projects">
+        <h2 class="section-title">I miei progetti</h2>
+        <div class="project-card">
+          <h3 class="project-name">Mini JSON-Placeholder</h3>
+          <p class="project-desc">Piattaforma e-commerce full-stack con pagamenti Stripe, dashboard admin e performance</p>
+        </div>
+        <div class="tech-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">JS</span>
+          <span class="tag">REST API</span>
+          <span class="tag">DOCKER</span>
+          <span class="tag">SQL</span>
+          <span class="tag">CSS</span>
+          <span class="tag">NODE.JS</span>
+          <span class="tag">REACT</span>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2 class="section-title">SKILLS</h2>
+      </section>
+
+      <section id="contact">
+        <h2 class="section-title">CONTATTAMI!</h2>
+        <div class="contact-links">
+          <a href="mailto:" class="contact-btn">GMAIL</a>
+          <a href="" class="contact-btn">GITHUB</a>
+          <a href="" class="contact-btn">LINKEDIN</a>
+        </div>
+      </section>
     </main>
-    <footer></footer>
+    <footer>
+      <p>© 2026 MADE WITH ♡ Braida Matteo</p>
+    </footer>
     <script src="js/main.js"></script>
   </body>
 </html>

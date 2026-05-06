@@ -32,3 +32,18 @@ header button {
   font-size: var(--space-8);
   padding: var(--space-2);
 }
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  min-height: 80vh;
+}
+
+.name {
+  font-family: var(--font-display);
+  text-align: center;
+  font-size: clamp(2.6rem, 15vw, 7rem);
+}
