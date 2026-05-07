@@ -170,3 +170,144 @@ header button span {
 .btn-violet {
   background-color: var(--color-violet);
 }
+
+/* ── Projects ── */
+
+#projects .section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 8vw, 2.5rem);
+  text-align: center;
+  color: var(--color-lavender);
+  -webkit-text-stroke: 2px var(--color-ink);
+  paint-order: stroke fill;
+  position: relative;
+  margin-bottom: var(--space-6);
+}
+
+#projects .section-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--color-red);
+  -webkit-text-stroke: 2px var(--color-ink);
+  paint-order: stroke fill;
+  transform: translate(3px, 2px);
+  z-index: -1;
+}
+
+/* ── Projects ── */
+
+#projects {
+  padding-inline: var(--space-4);
+}
+
+.project-stack {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.project-card {
+  background-color: var(--color-steel);
+  padding: var(--space-4);
+}
+
+.project-stack + .project-stack {
+  margin-top: var(--space-4);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-name {
+  font-family: var(--font-reserve);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.project-divider {
+  border: none;
+  border-top: 2px solid var(--color-ink);
+  margin-block: var(--space-4);
+}
+
+.project-desc {
+  font-family: var(--font-reserve);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--color-ink);
+  font-family: var(--font-reserve);
+  font-weight: 700;
+  font-size: 0.75rem;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.project-link:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* ── Project Languages Bar ── */
+
+.lang-bar {
+  display: flex;
+  height: 12px;
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.lang-bar-segment {
+  height: 100%;
+}
+
+.lang-bar-segment + .lang-bar-segment {
+  border-left: 1px solid var(--color-ink);
+}
+
+.lang-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.lang-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-reserve);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.lang-legend-dot {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
