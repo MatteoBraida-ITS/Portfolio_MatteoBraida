@@ -51,11 +51,14 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Hero Section
 
-- Name ("Matteo Braida") in display font
-- Tagline: "Trasformo sogni in solide realtà."
-- Two CTA buttons: PROGETTI + CONTATTI
-- Pink/salmon background
-- Reference: `assets/design/figma/Mockup_Mobile.png`
+- Name ("Matteo Braida") in display font, **ExtraBold (800)**, rotated **-10deg**
+- Double-layer text effect: coral (`--color-coral`) text + sage (`--color-sage`) text-shadow offset
+- Tagline: "Trasformo sogni in solide realtà." — left-aligned, pushed to bottom half via `margin-top: auto`
+- Two CTA buttons: PROGETTI (teal bg) + CONTATTI (violet bg) — `justify-content: space-between`
+- Buttons use `--radius-lg: 20px` (rounded, per Figma — exception to pill-button rule)
+- Pink/salmon background (`--color-pink`)
+- Figma source: `https://www.figma.com/design/hQFWN7ULDcFzq02b3YfqFZ/Untitled?node-id=44-3`
+- Local reference: `assets/design/figma/Mockup_Mobile.png`
 
 ### What NOT to Do
 
@@ -127,7 +130,7 @@ The project structure exists but all visual implementation is being redone. Trea
 | 1 | Update tokens.css with neo-brutalist design tokens | Done |
 | 2 | Revise base typography and global styles | Done |
 | 3 | Restyle header + nav + drawer (neo-brutalist) | Done |
-| 4 | Hero section with rotating starburst SVG (GSAP) | ⏳ In progress (HTML structure done, starburst + GSAP pending) |
+| 4 | Hero section with rotating starburst SVG (GSAP) | ⏳ In progress (layout + styling done per Figma, starburst SVG + GSAP pending) |
 | 5 | Projects section with cards | Pending |
 | 6 | Skills section | Pending |
 | 7 | About section with timeline | Pending |
@@ -142,9 +145,7 @@ The project structure exists but all visual implementation is being redone. Trea
 ## Open Questions
 
 - **Title**: "Fullstack Web Developer" — verify if accurate or should be just "Web Developer" (credibility matters in interviews)
-- **Heading font**: final choice TBD (Space Grotesk, Syne, or other)
 - **Skills list**: define honest list before implementing skills section
-- **Hero copy**: define before implementing hero section
 - **`defer` vs `async`** on script tag — introduce when relevant
 - **Drawer a11y**: focus trap, ESC-to-close, focus return, `role="dialog"` — address at accessibility pass
 - **Hamburger icon**: currently text, replace with SVG
