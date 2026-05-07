@@ -86,16 +86,16 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Contact Section
 
-- Background: `--color-bg` (cream)
-- **Title**: "Contattami!" in display font, ExtraBold 800, centered, plain black (no 3D text effect)
-- **Layout**: `.contact-links` — flex row with `justify-content: space-between`, `align-items: flex-start`
-- **Staircase effect**: each button gets progressive `margin-top` (0 → `--space-6` → `--space-12`) for a diagonal stepped layout
-- **Button styling**: `.contact-btn` — Inter font, bold, `--radius-lg` (20px rounded), thick border, hard shadow, hover/active lift effect (same pattern as hero CTAs)
-- **Button colors by nth-child**: Gmail = `--color-green`, GitHub = `--color-red`, LinkedIn = `--color-orange`
+- **Card wrapper**: `.contact-card` with blue background (`#0267c1`), 5px black border, `4px 8px 0` hard shadow, no border-radius (sharp corners)
+- **Title**: "Contattami!" with double-layer 3D text effect via `data-text` attribute — mint `#99e1d9` front (with 1px black stroke) + black `::before` offset 3px right. Font: display, weight 400. Uses `isolation: isolate` to keep pseudo behind text but above card background
+- **Layout**: `.contact-links` — flex row with `justify-content: space-between`, `align-items: center`, all buttons at same level (no staircase)
+- **Button styling**: `.contact-btn` — display font (Plus Jakarta Sans), weight 400, 0.9375rem (15px), 1px black border, `border-radius: 10px`, `2px 4px 0` hard shadow, hover/active lift effect
+- **Button colors by nth-child**: Gmail = `#c3f73a` (lime), GitHub = `#93032e` (maroon), LinkedIn = `#f4743b` (orange)
+- **Button icons**: inline SVGs (`.contact-icon`, 1em sized, `fill="currentColor"`) from Simple Icons — Gmail envelope, GitHub octocat, LinkedIn logo. `gap: var(--space-2)` between icon and text
 - **Links**: `mailto:braida97@gmail.com`, GitHub profile URL set, LinkedIn href empty (TBD)
-- **GSAP animation** (in progress): ScrollTrigger-based slide-in from left with stagger. Currently using `gsap.fromTo()` with `opacity: 0, x: -300` → `opacity: 1, x: 0`. `markers: true` is ON for debugging — remove when working.
+- **GSAP animation**: ScrollTrigger-based pop effect. `gsap.fromTo()` with `scale: 0, opacity: 0` → `scale: 1, opacity: 1`, `ease: "back.out(2)"` for bounce overshoot, `stagger: 0.15`, trigger at `top 80%`
 - `overflow-x: hidden` on `body` (in `base.css`) to prevent scrollbars during animation
-- Figma source: `https://www.figma.com/design/hQFWN7ULDcFzq02b3YfqFZ/Untitled?node-id=76-3`
+- Penpot source: "Component 6" board in Page 1
 
 ### Footer
 
@@ -119,7 +119,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 | Avatar | Placeholder for now, real photo added when site is finished |
 | Projects at launch | 1 real + 2 "Coming soon" styled cards |
 | Skills | HTML, CSS, JS, Node.js, React, Docker, SQL, REST API — implemented with Devicon + inline SVGs |
-| Contact | Direct mailto, GitHub, LinkedIn — text buttons (no SVG icons), staircase layout with GSAP slide-in |
+| Contact | Direct mailto, GitHub, LinkedIn — buttons with inline SVG icons, flat row layout, GSAP pop-in animation |
 | Real addresses/links | Developer inserts these during implementation |
 | Mobile menu v1 | **Side drawer** from right |
 
@@ -177,10 +177,10 @@ The project structure exists but all visual implementation is being redone. Trea
 | 5 | Projects section with cards | ⏳ In progress (card layout + GitHub languages bar done, "Coming soon" cards pending) |
 | 6 | Skills section | Done |
 | 7 | About section with timeline | Pending |
-| 8 | Contact section | ⏳ In progress (layout + styling done, GSAP slide-in animation debugging in progress) |
+| 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
 | 9 | Footer | Done |
 | 10 | Responsive desktop adaptation | Pending |
-| 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (ScrollTrigger added for contact buttons, needs debugging) |
+| 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst + other sections pending) |
 | 12 | Accessibility pass | Pending |
 | 13 | SEO and meta tags | Pending |
 | 14 | Final polish | Pending |
@@ -191,7 +191,7 @@ The project structure exists but all visual implementation is being redone. Trea
 - **`defer` vs `async`** on script tag — introduce when relevant
 - **Drawer a11y**: focus trap, ESC-to-close, focus return, `role="dialog"` — address at accessibility pass
 - **Hamburger icon**: currently CSS-styled `<span>` bars — consider replacing with SVG for animated open/close transition
-- **Design tool migration**: switching from Figma MCP server to Penpot MCP server (Figma Starter plan rate limits hit repeatedly)
+- **Design tool migration**: now using Penpot MCP server for new designs (contact section onwards). Figma references remain for older sections (hero, projects, skills)
 
 ## Learning Priority
 

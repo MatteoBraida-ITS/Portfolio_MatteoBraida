@@ -396,63 +396,91 @@ header button span {
 /* ── Contact ── */
 
 #contact {
-  padding: var(--space-16) var(--space-4);
-  background-color: var(--color-bg);
+  padding: var(--space-8) var(--space-4);
+}
+
+.contact-card {
+  background-color: #0267c1;
+  border: 5px solid var(--color-ink);
+  box-shadow: 4px 8px 0 var(--color-ink);
+  padding: var(--space-12) var(--space-4) var(--space-8);
 }
 
 #contact .section-title {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 400;
   font-size: clamp(2rem, 8vw, 2.5rem);
   text-align: center;
-  color: var(--color-ink);
+  color: #99e1d9;
+  -webkit-text-stroke: 1px var(--color-ink);
+  paint-order: stroke fill;
+  position: relative;
+  isolation: isolate;
   margin-bottom: var(--space-6);
+}
+
+#contact .section-title::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--color-ink);
+  -webkit-text-stroke: 0;
+  transform: translate(3px, 0);
+  z-index: -1;
 }
 
 .contact-links {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .contact-btn {
-  display: inline-block;
-  font-family: var(--font-reserve);
-  font-weight: 700;
-  font-size: 1.25rem;
-  padding: var(--space-2) var(--space-6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  min-width: 107px;
+  padding: var(--space-3) var(--space-4);
   color: var(--color-ink);
-  border: var(--border);
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-ink);
+  box-shadow: 2px 4px 0 var(--color-ink);
   text-decoration: none;
-  border-radius: var(--radius-lg);
+  border-radius: 10px;
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
 }
 
 .contact-btn:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 var(--color-ink);
+  transform: translate(1px, 2px);
+  box-shadow: 1px 2px 0 var(--color-ink);
 }
 
 .contact-btn:active {
-  transform: translate(5px, 5px);
+  transform: translate(2px, 4px);
   box-shadow: none;
 }
 
+.contact-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
 .contact-btn:nth-child(1) {
-  background-color: var(--color-green);
+  background-color: #c3f73a;
 }
 
 .contact-btn:nth-child(2) {
-  margin-top: var(--space-6);
-  background-color: var(--color-red);
+  background-color: #93032e;
 }
 
 .contact-btn:nth-child(3) {
-  margin-top: var(--space-12);
-  background-color: var(--color-orange);
+  background-color: #f4743b;
 }
 
 /* ── Footer ── */

@@ -43,17 +43,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 gsap.fromTo(
   ".contact-btn",
-  { opacity: 0, x: -300 },
+  { scale: 0, opacity: 0 },
   {
+    scale: 1,
     opacity: 1,
-    x: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    stagger: 0.2,
+    duration: 0.5,
+    ease: "back.out(2)",
+    stagger: 0.15,
     scrollTrigger: {
       trigger: "#contact",
       start: "top 80%",
-      markers: true,
     },
   },
 );
