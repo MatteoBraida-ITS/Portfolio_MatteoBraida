@@ -37,6 +37,27 @@ bottoneMenu.addEventListener("pointerleave", () => {
   });
 });
 
+// ── Contact Slide-in ──
+
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.fromTo(
+  ".contact-btn",
+  { opacity: 0, x: -300 },
+  {
+    opacity: 1,
+    x: 0,
+    duration: 0.8,
+    ease: "power3.out",
+    stagger: 0.2,
+    scrollTrigger: {
+      trigger: "#contact",
+      start: "top 80%",
+      markers: true,
+    },
+  },
+);
+
 // ── GitHub Languages ──
 
 const LANG_COLORS = {
