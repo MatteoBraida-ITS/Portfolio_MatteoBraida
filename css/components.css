@@ -17,7 +17,7 @@ header .container {
 
 .logo {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: 3rem;
   text-decoration: none;
   -webkit-text-stroke: 3px var(--color-ink);
@@ -93,8 +93,8 @@ header button span {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(black 1px, transparent 1px),
-    linear-gradient(90deg, black 1px, transparent 1px);
+    linear-gradient(gray 1px, transparent 1px),
+    linear-gradient(90deg, gray 1px, transparent 1px);
   background-size: 30px 30px;
   background-position: var(--grid-pos, 0 0);
   pointer-events: none;
@@ -500,6 +500,7 @@ header button span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: var(--space-24);
   gap: var(--space-2);
   font-family: var(--font-display);
   font-weight: 400;

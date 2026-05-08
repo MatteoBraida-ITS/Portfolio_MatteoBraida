@@ -66,7 +66,7 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 
 gsap.to(".hero-starburst", {
   rotation: 360,
-  duration: 12,
+  duration: 40,
   repeat: -1,
   ease: "none",
   transformOrigin: "50% 50%",
