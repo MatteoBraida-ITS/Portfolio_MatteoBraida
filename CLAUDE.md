@@ -53,11 +53,17 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 ### Hero Section
 
 - Name ("Matteo Braida") in display font, **ExtraBold (800)**, rotated **-10deg**
-- Double-layer text effect: coral (`--color-coral`) text + sage (`--color-sage`) text-shadow offset
-- Tagline: "Trasformo sogni in solide realtà." — left-aligned, pushed to bottom half via `margin-top: auto`
-- Two CTA buttons: PROGETTI (teal bg) + CONTATTI (violet bg) — `justify-content: space-between`
-- Buttons use `--radius-lg: 20px` (rounded, per Figma — exception to pill-button rule)
-- Pink/salmon background (`--color-pink`)
+- Double-layer text effect: coral (`--color-coral`) text + sage (`--color-sage`) `::before` offset. `position: relative` on `.name`, `z-index: -1` on `::before`
+- **Starburst**: 16-point star SVG (`.hero-starburst`) centered behind the name via `.hero-name-wrap` wrapper
+  - Wrapper: `position: relative; isolation: isolate` — starburst at `top: 50%; left: 50%; margin: -150px` (half of 300px), `z-index: -1`
+  - Size: 300×300px, `color: var(--color-yellow)`, `stroke: #000; stroke-width: 4` on the `path`
+  - `aria-hidden="true"` (decorative)
+  - GSAP: `rotation: 360, duration: 12, repeat: -1, ease: "none", transformOrigin: "50% 50%"`
+  - Resize tip: if you change the size, update both `width`/`height` and `margin-top`/`margin-left` to `-(size / 2)px`
+- Tagline: "Cerco la precisione in ogni riga. Non sempre ci riesco, ma ci metto tutto me stesso!" — wrapped in `#hero-tagline` flex div, centered
+- **Three CTA buttons** (flex column, `gap: var(--space-12)`): PROGETTI (`.btn-progetti`, `--color-steel`) + SKILLS (`.btn-skills`, `--color-emerald`) + CONTATTI (`.btn-contatti`, `--color-blue`)
+- Buttons use `--radius-lg: 20px`
+- Pink/salmon background (`--color-pink`), `border-bottom: var(--border)`
 - Figma source: `https://www.figma.com/design/hQFWN7ULDcFzq02b3YfqFZ/Untitled?node-id=44-3`
 - Local reference: `assets/design/figma/Mockup_Mobile.png`
 
@@ -97,9 +103,24 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 - `overflow-x: hidden` on `body` (in `base.css`) to prevent scrollbars during animation
 - Penpot source: "Component 6" board in Page 1
 
+### Graph Paper Grid
+
+- **Class**: `.has-grid` — applied to all sections (`#hero`, `#projects`, `#skills`, `#contact`) and `footer`
+- **CSS**: `::before` pseudo-element with `position: absolute; inset: 0; z-index: -1; pointer-events: none`
+  - Grid via two `linear-gradient` layers: horizontal + vertical lines, `black` color, 1px wide, `background-size: 30px 30px`
+  - Position driven by CSS custom property `--grid-pos` (default `0 0`)
+  - `isolation: isolate` on `.has-grid` scopes the `z-index: -1` to the section's stacking context
+- **JS** (`main.js`): `gsap.ticker.add` fires every frame
+  - Accumulates `gridY` at `+= 0.1` px/frame (diagonal: X = Y)
+  - Per-section offset formula: `bgY = ((gridY - section.offsetTop) % 30 + 30) % 30` — ensures lines align seamlessly across section boundaries regardless of section height
+  - `sectionTops` array rebuilt on `resize`
+  - Entire block guarded by `prefers-reduced-motion` check
+- **Speed**: change `gridY += 0.1` — this is px/frame at ~60fps (0.1 = 6px/sec)
+- **Cell size**: `GRID_SIZE = 30` in JS must match `background-size` in CSS — keep them in sync
+
 ### Footer
 
-- Background: `--color-pink` (matches hero — visual bookend)
+- Background: `--color-pink` (matches hero — visual bookend), `border-top: var(--border)`
 - Simple centered text: "© 2026 MADE WITH ♡ Braida Matteo"
 - Font: Inter (`--font-reserve`), 0.875rem
 
@@ -173,14 +194,14 @@ The project structure exists but all visual implementation is being redone. Trea
 | 1 | Update tokens.css with neo-brutalist design tokens | Done |
 | 2 | Revise base typography and global styles | Done |
 | 3 | Restyle header + nav + drawer (neo-brutalist) | Done |
-| 4 | Hero section with rotating starburst SVG (GSAP) | ⏳ In progress (layout + styling done per Figma, starburst SVG + GSAP pending) |
+| 4 | Hero section with rotating starburst SVG (GSAP) | Done (starburst centered on name, GSAP rotation, 3 CTA buttons) |
 | 5 | Projects section with cards | ⏳ In progress (card layout + GitHub languages bar done, "Coming soon" cards pending) |
 | 6 | Skills section | Done |
 | 7 | About section with timeline | Pending |
 | 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
 | 9 | Footer | Done |
 | 10 | Responsive desktop adaptation | Pending |
-| 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst + other sections pending) |
+| 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst done, graph paper grid done — remaining sections pending) |
 | 12 | Accessibility pass | Pending |
 | 13 | SEO and meta tags | Pending |
 | 14 | Final polish | Pending |
@@ -192,6 +213,7 @@ The project structure exists but all visual implementation is being redone. Trea
 - **Drawer a11y**: focus trap, ESC-to-close, focus return, `role="dialog"` — address at accessibility pass
 - **Hamburger icon**: currently CSS-styled `<span>` bars — consider replacing with SVG for animated open/close transition
 - **Design tool migration**: now using Penpot MCP server for new designs (contact section onwards). Figma references remain for older sections (hero, projects, skills)
+- **Grid line color**: currently `black` (high contrast, neo-brutalist). Could tone down to `rgba(0,0,0,0.06)` for subtlety — developer's call
 
 ## Learning Priority
 

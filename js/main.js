@@ -37,6 +37,41 @@ bottoneMenu.addEventListener("pointerleave", () => {
   });
 });
 
+// ── Graph Paper Grid ──
+
+const GRID_SIZE = 30;
+const gridSections = document.querySelectorAll(".has-grid");
+let gridY = 0;
+let sectionTops = [];
+
+function updateSectionTops() {
+  sectionTops = Array.from(gridSections).map((el) => el.offsetTop);
+}
+updateSectionTops();
+window.addEventListener("resize", updateSectionTops);
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  gsap.ticker.add(() => {
+    gridY += 0.1;
+    gridSections.forEach((el, i) => {
+      const bgX = gridY % GRID_SIZE;
+      const bgY =
+        (((gridY - sectionTops[i]) % GRID_SIZE) + GRID_SIZE) % GRID_SIZE;
+      el.style.setProperty("--grid-pos", `${bgX}px ${bgY}px`);
+    });
+  });
+}
+
+// ── Hero Starburst ──
+
+gsap.to(".hero-starburst", {
+  rotation: 360,
+  duration: 12,
+  repeat: -1,
+  ease: "none",
+  transformOrigin: "50% 50%",
+});
+
 // ── Contact Slide-in ──
 
 gsap.registerPlugin(ScrollTrigger);

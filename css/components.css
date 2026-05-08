@@ -81,10 +81,31 @@ header button span {
   border-radius: 1px;
 }
 
+/* ── Graph Paper Grid ── */
+
+.has-grid {
+  position: relative;
+  isolation: isolate;
+}
+
+.has-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(black 1px, transparent 1px),
+    linear-gradient(90deg, black 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: var(--grid-pos, 0 0);
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* ── Hero ── */
 
 #hero {
   background-color: var(--color-pink);
+  border-bottom: var(--border);
 }
 
 .hero-inner {
@@ -92,6 +113,12 @@ header button span {
   flex-direction: column;
   min-height: 80vh;
   padding: var(--space-16) var(--space-4);
+  position: relative;
+}
+
+.hero-name-wrap {
+  position: relative;
+  isolation: isolate;
 }
 
 .name {
@@ -120,19 +147,45 @@ header button span {
   z-index: -1;
 }
 
+.hero-starburst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -150px;
+  width: 300px;
+  height: 300px;
+  color: var(--color-yellow);
+  z-index: -1;
+}
+
+.hero-starburst path {
+  stroke: #000;
+  stroke-width: 4;
+}
+
+#hero-tagline {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 .tagline {
   font-family: var(--font-body);
   font-size: clamp(1.75rem, 8vw, 2.5rem);
-  font-weight: 400;
+  font-weight: 600;
   max-width: 15ch;
-  color: var(--color-ink);
-  margin-top: auto;
+  color: var(--color-bg);
+  -webkit-text-stroke: 1px black;
+  margin-top: var(--space-24);
 }
 
 .cta {
   display: flex;
-  justify-content: space-between;
-  margin-top: var(--space-6);
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
 }
 
 .btn {
@@ -163,12 +216,16 @@ header button span {
   box-shadow: none;
 }
 
-.btn-teal {
-  background-color: var(--color-teal);
+.btn-progetti {
+  background-color: var(--color-steel);
 }
 
-.btn-violet {
-  background-color: var(--color-violet);
+.btn-skills {
+  background-color: var(--color-emerald);
+}
+
+.btn-contatti {
+  background-color: var(--color-blue);
 }
 
 /* ── Projects ── */
@@ -200,6 +257,7 @@ header button span {
 
 #projects {
   padding-inline: var(--space-4);
+  border-bottom: var(--border);
 }
 
 .project-stack {
@@ -317,6 +375,7 @@ header button span {
 #skills {
   background-color: var(--color-pink);
   padding: var(--space-8) var(--space-4);
+  border-bottom: var(--border);
 }
 
 .skills-card {
@@ -489,6 +548,7 @@ footer {
   background-color: var(--color-pink);
   padding: var(--space-4);
   text-align: center;
+  border-top: var(--border);
 }
 
 footer p {
