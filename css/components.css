@@ -490,7 +490,9 @@ header button span {
 
 .contact-links {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-content: center;
   align-items: center;
 }
 
@@ -502,7 +504,6 @@ header button span {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 0.9375rem;
-  min-width: 107px;
   padding: var(--space-3) var(--space-4);
   color: var(--color-ink);
   border: 1px solid var(--color-ink);
