@@ -1,5 +1,7 @@
-const bottoneMenu = document.querySelector("header button");
+const bottoneMenu = document.querySelector("#menu-button");
 const navbar = document.querySelector("header nav");
+const darkModeBtn = document.querySelector("#darkMode-Btn");
+const html = document.documentElement;
 
 bottoneMenu.addEventListener("click", () => {
   navbar.classList.toggle("is-open");
@@ -35,6 +37,57 @@ bottoneMenu.addEventListener("pointerleave", () => {
     duration: 0.2,
     ease: "power2.out",
   });
+});
+
+darkModeBtn.addEventListener("pointerdown", () => {
+  gsap.to(darkModeBtn, {
+    x: 3,
+    y: 3,
+    boxShadow: "0px 0px 0 #0d0d0d",
+    duration: 0.1,
+    ease: "power2.out",
+  });
+});
+
+darkModeBtn.addEventListener("pointerup", () => {
+  gsap.to(darkModeBtn, {
+    x: 0,
+    y: 0,
+    boxShadow: "3px 3px 0 #0d0d0d",
+    duration: 0.2,
+    ease: "back.out(2)",
+  });
+});
+
+darkModeBtn.addEventListener("pointerleave", () => {
+  gsap.to(darkModeBtn, {
+    x: 0,
+    y: 0,
+    boxShadow: "3px 3px 0 #0d0d0d",
+    duration: 0.2,
+    ease: "power2.out",
+  });
+});
+
+// ── Dark Mode ──
+
+function applyTheme(theme) {
+  html.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}
+
+// On first visit, respect OS preference; otherwise use saved choice
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  applyTheme(savedTheme);
+} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  applyTheme("dark");
+}
+
+darkModeBtn.addEventListener("click", () => {
+  const current = html.getAttribute("data-theme");
+  applyTheme(current === "dark" ? "light" : "dark");
 });
 
 // ── Graph Paper Grid ──

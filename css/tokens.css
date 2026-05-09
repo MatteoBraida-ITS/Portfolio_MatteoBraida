@@ -2,12 +2,16 @@
   /* Colors — base */
   --color-bg: #f5f0e8;
   --color-ink: #0d0d0d;
+  --color-border: #000;
+  --color-black: #000000;
+  --color-white: #ffffff;
 
   /* Colors — accent */
   --color-yellow: #ffec00;
   --color-gold: #ffd400;
   --color-pink: #e58b7f;
   --color-blue: #2f7ef5;
+  --color-cerulean: #2274a5;
   --color-purple: #7c3aed;
   --color-orange: #f5720a;
   --color-green: #16a34a;
@@ -20,6 +24,7 @@
   --color-steel: #90a9b7;
   --color-emerald: #00a878;
   --color-dodgerBlue: #0496ff;
+  --color-pumpkinspice: #fa8334;
 
   /* Typography */
   --font-display: "Plus Jakarta Sans", sans-serif;
@@ -28,12 +33,12 @@
 
   /* Border */
   --border-width: 3px;
-  --border: var(--border-width) solid var(--color-ink);
+  --border: var(--border-width) solid var(--color-border);
 
   /* Shadow — offset nera stile neo-brutalist */
-  --shadow-sm: 3px 3px 0 var(--color-ink);
-  --shadow-md: 5px 5px 0 var(--color-ink);
-  --shadow-lg: 8px 8px 0 var(--color-ink);
+  --shadow-sm: 3px 3px 0 var(--color-black);
+  --shadow-md: 5px 5px 0 var(--color-black);
+  --shadow-lg: 8px 8px 0 var(--color-black);
 
   /* Rotazioni decorative */
   --rotate-neg: -2deg;
@@ -55,4 +60,9 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 20px;
+}
+
+[data-theme="dark"] {
+  --color-bg: #1f1f1f;
+  --color-ink: #f0ece0;
 }

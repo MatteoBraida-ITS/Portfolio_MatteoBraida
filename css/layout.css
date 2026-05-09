@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
+.navBtn-container {
+  display: flex;
+  gap: var(--space-4);
+}
+
 section {
   padding-block: var(--space-12);
 }

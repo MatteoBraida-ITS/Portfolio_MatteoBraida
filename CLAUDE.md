@@ -118,6 +118,36 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 - **Speed**: change `gridY += 0.1` — this is px/frame at ~60fps (0.1 = 6px/sec)
 - **Cell size**: `GRID_SIZE = 30` in JS must match `background-size` in CSS — keep them in sync
 
+### Dark Mode
+
+- **Mechanism**: `[data-theme="dark"]` attribute toggled on `<html>` by JS. CSS overrides only the two tokens that need to change:
+  ```css
+  [data-theme="dark"] {
+    --color-bg: #1a1a1a;
+    --color-ink: #f0ece0;
+  }
+  ```
+- **Token separation**: `--color-border: #000` is a dedicated token (never changes between themes). `--border` and all `--shadow-*` tokens use `--color-border`, not `--color-ink` — this keeps borders and shadows black in both themes while text color flips
+- **JS logic** (`main.js`): `applyTheme(theme)` sets `data-theme` on `document.documentElement` and saves to `localStorage`. On page load: reads `localStorage` first, falls back to `window.matchMedia("(prefers-color-scheme: dark)")`, defaults to light
+- **Fixed-background elements**: any element with a non-theme background (e.g. `.project-card` with `--color-steel`) must have `color: #000` pinned explicitly, otherwise `--color-ink` bleeds in and text turns light
+- **Dark mode button** (`#darkMode-Btn`): see Header section below
+
+### Header / Dark Mode Button
+
+- **Two buttons** in `.navBtn-container`: `#darkMode-Btn` (left) + `#menu-button` (right, hamburger)
+- Both share `header button` base styles: 40×40px, yellow background (`--color-yellow`), `var(--border)`, `var(--shadow-sm)`
+- `#darkMode-Btn` has `color: #000` pinned (button bg stays yellow in both themes, icon must stay black)
+- **Sun icon** (`id="sun"`, `viewBox="0 0 512 512"`, `fill="currentColor"`, `aria-hidden="true"`) — shown in light mode
+- **Moon icon** (`id="moon"`, `viewBox="0 0 20 20"`, `fill="currentColor"`, `aria-hidden="true"`) — shown in dark mode. Requires two nested `<g>` with `transform` to offset coordinates: `translate(-260, -2599)` → `translate(56, 160)`. Path uses `fill-rule="evenodd"` for the crescent cutout
+- **CSS show/hide**:
+  ```css
+  #darkMode-Btn #moon { display: none; }
+  [data-theme="dark"] #darkMode-Btn #sun { display: none; }
+  [data-theme="dark"] #darkMode-Btn #moon { display: block; }
+  ```
+- `aria-label="Toggle dark mode"` on the button element
+- GSAP press animation (pointerdown/pointerup/pointerleave) mirrors the hamburger button
+
 ### Footer
 
 - Background: `--color-pink` (matches hero — visual bookend), `border-top: var(--border)`
@@ -191,6 +221,7 @@ The project structure exists but all visual implementation is being redone. Trea
 
 | # | Task | Status |
 |---|---|---|
+| 0 | Dark mode (toggle button, CSS token swap, localStorage + OS preference) | Done |
 | 1 | Update tokens.css with neo-brutalist design tokens | Done |
 | 2 | Revise base typography and global styles | Done |
 | 3 | Restyle header + nav + drawer (neo-brutalist) | Done |
@@ -200,7 +231,7 @@ The project structure exists but all visual implementation is being redone. Trea
 | 7 | About section with timeline | Pending |
 | 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
 | 9 | Footer | Done |
-| 10 | Responsive desktop adaptation | Pending |
+| 10 | Responsive desktop adaptation | Pending (includes: hover press animation for `.btn` and `.contact-btn` via `@media (hover: hover)` — see notes below) |
 | 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst done, graph paper grid done — remaining sections pending) |
 | 12 | Accessibility pass | Pending |
 | 13 | SEO and meta tags | Pending |
@@ -214,6 +245,7 @@ The project structure exists but all visual implementation is being redone. Trea
 - **Hamburger icon**: currently CSS-styled `<span>` bars — consider replacing with SVG for animated open/close transition
 - **Design tool migration**: now using Penpot MCP server for new designs (contact section onwards). Figma references remain for older sections (hero, projects, skills)
 - **Grid line color**: currently `black` (high contrast, neo-brutalist). Could tone down to `rgba(0,0,0,0.06)` for subtlety — developer's call
+- **Button hover press animation (desktop only)**: `.btn` and `.contact-btn` need `@media (hover: hover)` wrapping their `:hover` rules so the neo-brutalist press effect only fires on mouse devices. `.btn:hover` → `translate(5px, 5px) + box-shadow: none`; `.contact-btn:hover` → `translate(2px, 4px) + box-shadow: none`. Keep `:active` rules outside the query for touch feedback on mobile.
 
 ## Learning Priority
 
