@@ -54,18 +54,24 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 - Name ("Matteo Braida") in display font, **ExtraBold (800)**, rotated **-10deg**
 - Double-layer text effect: coral (`--color-coral`) text + sage (`--color-sage`) `::before` offset. `position: relative` on `.name`, `z-index: -1` on `::before`
-- **Starburst**: 16-point star SVG (`.hero-starburst`) centered behind the name via `.hero-name-wrap` wrapper
+- **Starburst** (mobile): 16-point star SVG (`.hero-starburst`) centered behind the name via `.hero-name-wrap` wrapper
   - Wrapper: `position: relative; isolation: isolate` — starburst at `top: 50%; left: 50%; margin: -150px` (half of 300px), `z-index: -1`
   - Size: 300×300px, `color: var(--color-yellow)`, `stroke: #000; stroke-width: 4` on the `path`
   - `aria-hidden="true"` (decorative)
-  - GSAP: `rotation: 360, duration: 12, repeat: -1, ease: "none", transformOrigin: "50% 50%"`
-  - Resize tip: if you change the size, update both `width`/`height` and `margin-top`/`margin-left` to `-(size / 2)px`
+  - GSAP selector: `.hero-name-wrap .hero-starburst` (targets only the mobile one) — `rotation: 360, duration: 40, repeat: -1, ease: "none"`
 - Tagline: "Cerco la precisione in ogni riga. Non sempre ci riesco, ma ci metto tutto me stesso!" — wrapped in `#hero-tagline` flex div, centered
-- **Three CTA buttons** (flex column, `gap: var(--space-12)`): PROGETTI (`.btn-progetti`, `--color-steel`) + SKILLS (`.btn-skills`, `--color-emerald`) + CONTATTI (`.btn-contatti`, `--color-blue`)
-- Buttons use `--radius-lg: 20px`
 - Pink/salmon background (`--color-pink`), `border-bottom: var(--border)`
 - Figma source: `https://www.figma.com/design/hQFWN7ULDcFzq02b3YfqFZ/Untitled?node-id=44-3`
 - Local reference: `assets/design/figma/Mockup_Mobile.png`
+
+#### Hero Desktop Layout (`@media (min-width: 1024px)`)
+
+- `.hero-inner` switches to `display: grid; grid-template-columns: 1fr 1fr`
+- **Left column** (`.hero-left`): `display: none` on mobile, `display: flex` on desktop
+  - `.hero-photo-wrap`: `position: relative; width: 100%; max-width: 340px` — sizing context for photo + sparkle
+  - `.hero-photo`: `aspect-ratio: 3/4`, `--color-steel` bg placeholder, `border`, `--shadow-lg`, `overflow: hidden` (clips future photo)
+  - `.hero-sparkle`: 4-pointed sparkle SVG (`--color-lime`, black stroke), `position: absolute; top: 0; left: 0; transform: translate(-50%, -50%) rotate(20deg)` — centers the sparkle exactly on the frame's upper-left corner. Does NOT rotate (GSAP targets only `.hero-name-wrap .hero-starburst`)
+- **Right column** (`.hero-right`): `display: flex; flex-direction: column; gap: var(--space-8)` — contains `.hero-name-wrap` + `#hero-tagline`
 
 ### Projects Section
 
@@ -105,7 +111,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 - **Button icons**: inline SVGs (`.contact-icon`, 1em sized, `fill="currentColor"`) from Simple Icons — Gmail envelope, GitHub octocat, LinkedIn logo. `gap: var(--space-2)` between icon and text
 - **Links**: `mailto:braida97@gmail.com`, GitHub profile URL set, LinkedIn href empty (TBD)
 - **GSAP animation**: ScrollTrigger-based pop effect. `gsap.fromTo()` with `scale: 0, opacity: 0` → `scale: 1, opacity: 1`, `ease: "back.out(2)"` for bounce overshoot, `stagger: 0.15`, trigger at `top 80%`
-- `overflow-x: hidden` on `body` (in `base.css`) to prevent scrollbars during animation
+- `overflow-x: hidden` on `#contact` (in `components.css`) to prevent scrollbars during animation — moved from `body` to avoid clipping absolutely-positioned decorative elements in other sections
 - Penpot source: "Component 6" board in Page 1
 
 ### Graph Paper Grid
@@ -139,19 +145,27 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Header / Dark Mode Button
 
-- **Two buttons** in `.navBtn-container`: `#darkMode-Btn` (left) + `#menu-button` (right, hamburger)
-- Both share `header button` base styles: 40×40px, yellow background (`--color-yellow`), `var(--border)`, `var(--shadow-sm)`
-- `#darkMode-Btn` has `color: #000` pinned (button bg stays yellow in both themes, icon must stay black)
-- **Sun icon** (`id="sun"`, `viewBox="0 0 512 512"`, `fill="currentColor"`, `aria-hidden="true"`) — shown in light mode
-- **Moon icon** (`id="moon"`, `viewBox="0 0 20 20"`, `fill="currentColor"`, `aria-hidden="true"`) — shown in dark mode. Requires two nested `<g>` with `transform` to offset coordinates: `translate(-260, -2599)` → `translate(56, 160)`. Path uses `fill-rule="evenodd"` for the crescent cutout
+- **HTML structure**: `.header-brand` > `.header-logo-items` (logo + nav) + `.navBtn-container` (buttons)
+- **Mobile**: nav hidden (`display: none`), hamburger + dark mode buttons visible
+- **Desktop** (`@media (min-width: 1024px)`):
+  - Nav shown inline (`display: flex; position: static`) — resets all drawer styles
+  - Nav `ul` switches to `flex-direction: row`
+  - Nav links styled as neo-brutalist buttons: `border`, `--shadow-sm`, `border-radius: var(--radius-sm)`, `transition`
+  - Colors by `nth-child`: Home=`--color-yellow`, Progetti=`--color-steel`, Skills=`--color-emerald`, Contatti=`--color-blue`
+  - Hover press animation via `@media (hover: hover)` nested inside desktop breakpoint: `translate(3px, 3px) + box-shadow: none`
+  - `.header-brand`: `display: flex; flex: 1; justify-content: center` — centers logo+nav in available space
+  - `#menu-button`: `display: none`
+- **`header button` base**: 40×40px, yellow bg, `var(--border)`, `var(--shadow-sm)`, `transition: transform, box-shadow` (CSS handles all animations — no GSAP)
+- **`#darkMode-Btn`**: `color: #000` pinned; `:active` for mobile tap; `:hover` inside `@media (hover: hover)` for desktop
+- **Sun icon** (`id="sun"`, `viewBox="0 0 512 512"`) — shown in light mode
+- **Moon icon** (`id="moon"`, `viewBox="0 0 20 20"`) — shown in dark mode. Two nested `<g transform>` to offset path coordinates. `fill-rule="evenodd"` for crescent shape
 - **CSS show/hide**:
   ```css
   #darkMode-Btn #moon { display: none; }
   [data-theme="dark"] #darkMode-Btn #sun { display: none; }
   [data-theme="dark"] #darkMode-Btn #moon { display: block; }
   ```
-- `aria-label="Toggle dark mode"` on the button element
-- GSAP press animation (pointerdown/pointerup/pointerleave) mirrors the hamburger button
+- `aria-label="Toggle dark mode"` on the button
 
 ### Footer
 
@@ -230,13 +244,13 @@ The project structure exists but all visual implementation is being redone. Trea
 | 1 | Update tokens.css with neo-brutalist design tokens | Done |
 | 2 | Revise base typography and global styles | Done |
 | 3 | Restyle header + nav + drawer (neo-brutalist) | Done |
-| 4 | Hero section with rotating starburst SVG (GSAP) | Done (starburst centered on name, GSAP rotation, 3 CTA buttons) |
+| 4 | Hero section with rotating starburst SVG (GSAP) | Done (starburst on mobile, desktop 2-col layout with photo frame + sparkle, CTA buttons removed — nav links replace them) |
 | 5 | Projects section with cards | Done (carousel snap scroll, scrollable desc, 2 coming soon cards) |
 | 6 | Skills section | Done |
 | 7 | About section with timeline | Pending |
 | 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
 | 9 | Footer | Done |
-| 10 | Responsive desktop adaptation | Pending (includes: hover press animation for `.btn` and `.contact-btn` via `@media (hover: hover)` — see notes below) |
+| 10 | Responsive desktop adaptation | ⏳ In progress (header done, hero done — projects grid, skills, contact, max-width container pending) |
 | 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst done, graph paper grid done — remaining sections pending) |
 | 12 | Accessibility pass | Pending |
 | 13 | SEO and meta tags | Pending |
@@ -250,7 +264,8 @@ The project structure exists but all visual implementation is being redone. Trea
 - **Hamburger icon**: currently CSS-styled `<span>` bars — consider replacing with SVG for animated open/close transition
 - **Design tool migration**: now using Penpot MCP server for new designs (contact section onwards). Figma references remain for older sections (hero, projects, skills)
 - **Grid line color**: currently `black` (high contrast, neo-brutalist). Could tone down to `rgba(0,0,0,0.06)` for subtlety — developer's call
-- **Button hover press animation (desktop only)**: `.btn` and `.contact-btn` need `@media (hover: hover)` wrapping their `:hover` rules so the neo-brutalist press effect only fires on mouse devices. `.btn:hover` → `translate(5px, 5px) + box-shadow: none`; `.contact-btn:hover` → `translate(2px, 4px) + box-shadow: none`. Keep `:active` rules outside the query for touch feedback on mobile.
+- **Button hover press animation (desktop only)**: `.btn` and `.contact-btn` still need `@media (hover: hover)` wrapping — deferred to desktop pass. Header nav links and `#darkMode-Btn` already done.
+- **New tokens added**: `--color-chartreuse: #7acc00` (sparkle fill), `--color-lime: #00ff19` (currently used for sparkle — may consolidate with chartreuse)
 
 ## Learning Priority
 

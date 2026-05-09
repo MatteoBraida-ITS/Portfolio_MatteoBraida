@@ -39,35 +39,6 @@ bottoneMenu.addEventListener("pointerleave", () => {
   });
 });
 
-darkModeBtn.addEventListener("pointerdown", () => {
-  gsap.to(darkModeBtn, {
-    x: 3,
-    y: 3,
-    boxShadow: "0px 0px 0 #0d0d0d",
-    duration: 0.1,
-    ease: "power2.out",
-  });
-});
-
-darkModeBtn.addEventListener("pointerup", () => {
-  gsap.to(darkModeBtn, {
-    x: 0,
-    y: 0,
-    boxShadow: "3px 3px 0 #0d0d0d",
-    duration: 0.2,
-    ease: "back.out(2)",
-  });
-});
-
-darkModeBtn.addEventListener("pointerleave", () => {
-  gsap.to(darkModeBtn, {
-    x: 0,
-    y: 0,
-    boxShadow: "3px 3px 0 #0d0d0d",
-    duration: 0.2,
-    ease: "power2.out",
-  });
-});
 
 // ── Dark Mode ──
 
@@ -117,7 +88,7 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 
 // ── Hero Starburst ──
 
-gsap.to(".hero-starburst", {
+gsap.to(".hero-name-wrap .hero-starburst", {
   rotation: 360,
   duration: 40,
   repeat: -1,

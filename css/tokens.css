@@ -10,6 +10,7 @@
   --color-yellow: #ffec00;
   --color-gold: #ffd400;
   --color-pink: #e58b7f;
+  --color-razzmatazz: #f61067;
   --color-blue: #2f7ef5;
   --color-cerulean: #2274a5;
   --color-purple: #7c3aed;
@@ -25,6 +26,8 @@
   --color-emerald: #00a878;
   --color-dodgerBlue: #0496ff;
   --color-pumpkinspice: #fa8334;
+  --color-chartreuse: #7acc00;
+  --color-lime: #00ff19;
 
   /* Typography */
   --font-display: "Plus Jakarta Sans", sans-serif;
@@ -63,6 +66,6 @@
 }
 
 [data-theme="dark"] {
-  --color-bg: #1f1f1f;
+  --color-bg: oklch(23.93% 0 0);
   --color-ink: #f0ece0;
 }
