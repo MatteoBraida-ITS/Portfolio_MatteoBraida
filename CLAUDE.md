@@ -70,14 +70,19 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 ### Projects Section
 
 - Section title ("I miei progetti") uses same double-layer 3D text effect as hero name: lavender text + red `::before` offset, via `data-text` attribute
+- **Carousel structure**: `.projects-carousel` (horizontal snap scroll container) → `.project-slide` (one per project) → `.project-stack` cards inside each slide
+  - `.projects-carousel`: `display: flex`, `overflow-x: auto`, `scroll-snap-type: x mandatory`, `gap`, `scrollbar-width: none` (scrollbar hidden)
+  - `.project-slide`: `flex: 0 0 100%`, `min-width: 0` (prevents text from expanding slide), `scroll-snap-align: start`
+  - `padding-bottom` and `padding-right` on carousel to prevent `overflow: auto` from clipping card shadows
 - **Card structure**: `.project-stack` (outer border + shadow + radius + overflow) → `.project-card` (background + padding) inside
 - Project card contains: `.project-card-header` (name + GitHub SVG link), `<hr class="project-divider">`, `.project-desc`
-- **Languages card**: a separate `.project-stack` below the project card, with its own border/shadow. Contains an `<h4>` title "Languages", a divider, and a `.project-langs` container populated by JS
+- **`.project-desc`**: `max-height: 100px`, `overflow-y: auto`, custom black scrollbar via `::-webkit-scrollbar` + `scrollbar-color` (Firefox)
+- **Languages card**: a separate `.project-stack` inside the same `.project-slide`, with its own border/shadow. Contains an `<h4>` title "Languages", a divider, and a `.project-langs` container populated by JS
 - **GitHub Languages API**: JS fetches `https://api.github.com/repos/{owner}/{repo}/languages` for each `.project-stack[data-repo]`, calculates byte percentages, renders a stacked color bar (`.lang-bar` with `.lang-bar-segment` per language) + dot legend (`.lang-legend`). Language colors match GitHub's official palette via `LANG_COLORS` map in `main.js`
 - GitHub username: **MatteoBraida-ITS**
 - Current real project: `mini-jsonplaceholde-full-stack`
+- **2 "Coming soon" cards**: same `.project-stack` + `.project-card` structure, no GitHub link, no languages bar, text "Coming soon..." in both name and description
 - Background color: `--color-steel` (#90a9b7)
-- Still pending: 2 "Coming soon" styled cards
 
 ### Skills Section
 
@@ -226,7 +231,7 @@ The project structure exists but all visual implementation is being redone. Trea
 | 2 | Revise base typography and global styles | Done |
 | 3 | Restyle header + nav + drawer (neo-brutalist) | Done |
 | 4 | Hero section with rotating starburst SVG (GSAP) | Done (starburst centered on name, GSAP rotation, 3 CTA buttons) |
-| 5 | Projects section with cards | ⏳ In progress (card layout + GitHub languages bar done, "Coming soon" cards pending) |
+| 5 | Projects section with cards | Done (carousel snap scroll, scrollable desc, 2 coming soon cards) |
 | 6 | Skills section | Done |
 | 7 | About section with timeline | Pending |
 | 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
