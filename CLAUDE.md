@@ -59,8 +59,8 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
   - Size: 300×300px, `color: var(--color-yellow)`, `stroke: #000; stroke-width: 4` on the `path`
   - `aria-hidden="true"` (decorative)
   - GSAP selector: `.hero-name-wrap .hero-starburst` (targets only the mobile one) — `rotation: 360, duration: 40, repeat: -1, ease: "none"`
-- Tagline: "Cerco la precisione in ogni riga. Non sempre ci riesco, ma ci metto tutto me stesso!" — wrapped in `#hero-tagline` flex div, centered
-- Pink/salmon background (`--color-pink`), `border-bottom: var(--border)`
+- Tagline: "Cerco la precisione in ogni riga. Non sempre ci riesco, ma ci metto tutto me stesso!" — wrapped in `#hero-tagline` flex div, centered; color uses `--color-tagline` (`#000` light / `#ffffff` dark)
+- Background: `--color-sections` (`#dcebfe` light / `#20294b` dark), `border-bottom: var(--border)`
 - Figma source: `https://www.figma.com/design/hQFWN7ULDcFzq02b3YfqFZ/Untitled?node-id=44-3`
 - Local reference: `assets/design/figma/Mockup_Mobile.png`
 
@@ -92,7 +92,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Skills Section
 
-- Background: `--color-pink` (same as hero, visual continuity)
+- Background: `--color-sections` (same as hero, visual continuity; theme-aware)
 - **Card**: `.skills-card` with `--color-emerald` background, 3px black border, `--shadow-md`, **no border-radius** (sharp corners per Figma)
 - **Title**: "SKILLS" with same double-layer 3D text effect via `data-text` attribute — violet front + yellow `::before` offset. Uses `isolation: isolate` on the title to prevent `z-index: -1` from pushing the pseudo-element behind the card background
 - **Grid**: `.skills-grid` — `grid-template-columns: repeat(3, 1fr)`, `gap: var(--space-3)`
@@ -131,10 +131,12 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Dark Mode
 
-- **Mechanism**: `[data-theme="dark"]` attribute toggled on `<html>` by JS. CSS overrides only the two tokens that need to change:
+- **Mechanism**: `[data-theme="dark"]` attribute toggled on `<html>` by JS. CSS overrides tokens that need to change:
   ```css
   [data-theme="dark"] {
-    --color-bg: #1a1a1a;
+    --color-bg: oklch(23.93% 0 0);
+    --color-sections: #20294b;
+    --color-tagline: #ffffff;
     --color-ink: #f0ece0;
   }
   ```
@@ -145,7 +147,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Header / Dark Mode Button
 
-- **HTML structure**: `.header-brand` > `.header-logo-items` (logo + nav) + `.navBtn-container` (buttons)
+- **HTML structure**: `.header-brand` > `.header-logo` (logo only) + `.header-links` (nav + buttons container)
 - **Mobile**: nav hidden (`display: none`), hamburger + dark mode buttons visible
 - **Desktop** (`@media (min-width: 1024px)`):
   - Nav shown inline (`display: flex; position: static`) — resets all drawer styles
@@ -169,7 +171,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 ### Footer
 
-- Background: `--color-pink` (matches hero — visual bookend), `border-top: var(--border)`
+- Background: `--color-sections` (matches hero — visual bookend, theme-aware), `border-top: var(--border)`
 - Simple centered text: "© 2026 MADE WITH ♡ Braida Matteo"
 - Font: Inter (`--font-reserve`), 0.875rem
 
@@ -265,7 +267,7 @@ The project structure exists but all visual implementation is being redone. Trea
 - **Design tool migration**: now using Penpot MCP server for new designs (contact section onwards). Figma references remain for older sections (hero, projects, skills)
 - **Grid line color**: currently `black` (high contrast, neo-brutalist). Could tone down to `rgba(0,0,0,0.06)` for subtlety — developer's call
 - **Button hover press animation (desktop only)**: `.btn` and `.contact-btn` still need `@media (hover: hover)` wrapping — deferred to desktop pass. Header nav links and `#darkMode-Btn` already done.
-- **New tokens added**: `--color-chartreuse: #7acc00` (sparkle fill), `--color-lime: #00ff19` (currently used for sparkle — may consolidate with chartreuse)
+- **New tokens added**: `--color-chartreuse: #7acc00` (sparkle fill), `--color-lime: #00ff19` (currently used for sparkle — may consolidate with chartreuse), `--color-sections` (theme-aware bg for hero/skills/footer: `#dcebfe` light / `#20294b` dark), `--color-tagline` (hero tagline text: `#000` light / `#ffffff` dark)
 
 ## Learning Priority
 

@@ -8,9 +8,10 @@ header {
   z-index: 100;
 }
 
-header .container {
+header .container .header-brand {
   display: flex;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   padding-block: var(--space-2);
 }
@@ -132,7 +133,7 @@ header button span {
 /* ── Hero ── */
 
 #hero {
-  background-color: var(--color-pink);
+  background-color: var(--color-sections);
   border-bottom: var(--border);
 }
 
@@ -203,7 +204,7 @@ header button span {
   font-size: clamp(1.75rem, 8vw, 2.5rem);
   font-weight: 600;
   max-width: 15ch;
-  color: var(--color-white);
+  color: var(--color-tagline);
   -webkit-text-stroke: 1px black;
   margin-top: var(--space-24);
 }
@@ -587,7 +588,7 @@ header button span {
 /* ── Skills ── */
 
 #skills {
-  background-color: var(--color-pink);
+  background-color: var(--color-sections);
   padding: var(--space-8) var(--space-4);
   border-bottom: var(--border);
 }
@@ -762,7 +763,7 @@ header button span {
 /* ── Footer ── */
 
 footer {
-  background-color: var(--color-pink);
+  background-color: var(--color-sections);
   padding: var(--space-4);
   text-align: center;
   border-top: var(--border);

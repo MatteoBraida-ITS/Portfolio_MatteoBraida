@@ -5,6 +5,8 @@
   --color-border: #000;
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-sections: #dcebfe;
+  --color-tagline: #000;
 
   /* Colors — accent */
   --color-yellow: #ffec00;
@@ -67,5 +69,7 @@
 
 [data-theme="dark"] {
   --color-bg: oklch(23.93% 0 0);
+  --color-sections: #20294b;
+  --color-tagline: #ffffff;
   --color-ink: #f0ece0;
 }
