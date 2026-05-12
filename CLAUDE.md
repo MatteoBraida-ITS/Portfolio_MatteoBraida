@@ -73,6 +73,18 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
   - `.hero-sparkle`: 4-pointed sparkle SVG (`--color-lime`, black stroke), `position: absolute; top: 0; left: 0; transform: translate(-50%, -50%) rotate(20deg)` — centers the sparkle exactly on the frame's upper-left corner. Does NOT rotate (GSAP targets only `.hero-name-wrap .hero-starburst`)
 - **Right column** (`.hero-right`): `display: flex; flex-direction: column; gap: var(--space-8)` — contains `.hero-name-wrap` + `#hero-tagline`
 
+### About Section
+
+- Placed between Hero and Projects in page order
+- **No timeline** — career change context (driver/warehouse → dev) makes a timeline look sparse; two cards is cleaner
+- **Background**: `--color-bg` (differentiates from `--color-sections` used by hero/skills/footer)
+- **Title**: "Chi sono" with double-layer 3D text effect — coral front + teal `::before` offset. `data-text="Chi sono"` (capital C)
+- **Layout**: `.about-inner` (`max-width: 1280px; margin-inline: auto`) → `.about-grid` (flex column mobile, flex row desktop)
+- **Bio card** (`.about-bio`): `--color-yellow` bg, border, `--shadow-md`, `flex: 2` on desktop. Body text in `--font-body`, `line-height: 1.7`
+- **Education card** (`.about-edu`): `--color-teal` bg, border, `--shadow-md`, `flex: 1` on desktop. Contains heading "Formazione", divider, ITS program name + "in corso" date
+- **Desktop**: `flex-direction: row; align-items: flex-start` on `.about-grid` — `flex-start` prevents edu card from stretching to bio card height
+- **Nav link**: "Chi sono" added as 2nd nav item (`href="#about"`). Nav `nth-child` colors updated to 5 items: Home=yellow, Chi sono=coral, Progetti=steel, Skills=emerald, Contatti=blue
+
 ### Projects Section
 
 - Section title ("I miei progetti") uses same double-layer 3D text effect as hero name: lavender text + red `::before` offset, via `data-text` attribute
@@ -251,7 +263,7 @@ The project structure exists but all visual implementation is being redone. Trea
 | 4 | Hero section with rotating starburst SVG (GSAP) | Done (starburst on mobile, desktop 2-col layout with photo frame + sparkle, CTA buttons removed — nav links replace them) |
 | 5 | Projects section with cards | Done (carousel snap scroll, scrollable desc, 2 coming soon cards) |
 | 6 | Skills section | Done |
-| 7 | About section with timeline | Pending |
+| 7 | About section with timeline | Done (no timeline — bio card + education card, 2/3+1/3 desktop split) |
 | 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
 | 9 | Footer | Done |
 | 10 | Responsive desktop adaptation | Done (container max-width 1280px, header gap `--space-8`, projects 3-col grid, skills 4-col grid, contact buttons row) |
