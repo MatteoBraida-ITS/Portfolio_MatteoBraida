@@ -80,6 +80,8 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
   - `.projects-carousel`: `display: flex`, `overflow-x: auto`, `scroll-snap-type: x mandatory`, `gap`, `scrollbar-width: none` (scrollbar hidden)
   - `.project-slide`: `flex: 0 0 100%`, `min-width: 0` (prevents text from expanding slide), `scroll-snap-align: start`
   - `padding-bottom` and `padding-right` on carousel to prevent `overflow: auto` from clipping card shadows
+- **Desktop layout** (`@media (min-width: 1024px)`): carousel overrides to `display: grid; grid-template-columns: repeat(3, 1fr); overflow-x: visible; scroll-snap-type: none` — all 3 slides visible side by side. `max-width: 1280px; margin-inline: auto` on both carousel and section title
+  - **Important**: these desktop overrides must live in a `@media` block placed **after** all base section styles in `components.css` — earlier media query rules lose to later base rules of equal specificity
 - **Card structure**: `.project-stack` (outer border + shadow + radius + overflow) → `.project-card` (background + padding) inside
 - Project card contains: `.project-card-header` (name + GitHub SVG link), `<hr class="project-divider">`, `.project-desc`
 - **`.project-desc`**: `max-height: 100px`, `overflow-y: auto`, custom black scrollbar via `::-webkit-scrollbar` + `scrollbar-color` (Firefox)
@@ -95,7 +97,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 - Background: `--color-sections` (same as hero, visual continuity; theme-aware)
 - **Card**: `.skills-card` with `--color-emerald` background, 3px black border, `--shadow-md`, **no border-radius** (sharp corners per Figma)
 - **Title**: "SKILLS" with same double-layer 3D text effect via `data-text` attribute — violet front + yellow `::before` offset. Uses `isolation: isolate` on the title to prevent `z-index: -1` from pushing the pseudo-element behind the card background
-- **Grid**: `.skills-grid` — `grid-template-columns: repeat(3, 1fr)`, `gap: var(--space-3)`
+- **Grid**: `.skills-grid` — `grid-template-columns: repeat(3, 1fr)`, `gap: var(--space-3)`. Desktop: `repeat(4, 1fr)` — 2 rows of 4. `.skills-card` gets `max-width: 1280px; margin-inline: auto` on desktop
 - **Skill items**: square cards (`aspect-ratio: 1`) with cream bg, border, shadow, hover lift effect
 - **Icons**: 6 via Devicon CDN (`<i>` tags), 2 via inline SVG (SQL = database cylinder, REST API = double-arrow) since Devicon doesn't have those
 - **Skills list**: HTML, CSS, JS, Node.js, React, Docker, SQL, REST API
@@ -105,7 +107,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 - **Card wrapper**: `.contact-card` with blue background (`#0267c1`), 5px black border, `4px 8px 0` hard shadow, no border-radius (sharp corners)
 - **Title**: "Contattami!" with double-layer 3D text effect via `data-text` attribute — mint `#99e1d9` front (with 1px black stroke) + black `::before` offset 3px right. Font: display, weight 400. Uses `isolation: isolate` to keep pseudo behind text but above card background
-- **Layout**: `.contact-links` — flex row with `justify-content: space-between`, `align-items: center`, all buttons at same level (no staircase)
+- **Layout**: `.contact-links` — mobile: `flex-direction: column`. Desktop: `flex-direction: row; justify-content: space-between`, all buttons at same level (no staircase). `.contact-card` gets `max-width: 1280px; margin-inline: auto` on desktop
 - **Button styling**: `.contact-btn` — display font (Plus Jakarta Sans), weight 400, 0.9375rem (15px), 1px black border, `border-radius: 10px`, `2px 4px 0` hard shadow, hover/active lift effect
 - **Button colors by nth-child**: Gmail = `#c3f73a` (lime), GitHub = `#93032e` (maroon), LinkedIn = `#f4743b` (orange)
 - **Button icons**: inline SVGs (`.contact-icon`, 1em sized, `fill="currentColor"`) from Simple Icons — Gmail envelope, GitHub octocat, LinkedIn logo. `gap: var(--space-2)` between icon and text
@@ -155,7 +157,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
   - Nav links styled as neo-brutalist buttons: `border`, `--shadow-sm`, `border-radius: var(--radius-sm)`, `transition`
   - Colors by `nth-child`: Home=`--color-yellow`, Progetti=`--color-steel`, Skills=`--color-emerald`, Contatti=`--color-blue`
   - Hover press animation via `@media (hover: hover)` nested inside desktop breakpoint: `translate(3px, 3px) + box-shadow: none`
-  - `.header-brand`: `display: flex; flex: 1; justify-content: center` — centers logo+nav in available space
+  - `.header-brand`: `display: flex; flex: 1; justify-content: center; gap: var(--space-8)` — centers logo+nav in available space, `--space-8` keeps elements grouped without excess spread
   - `#menu-button`: `display: none`
 - **`header button` base**: 40×40px, yellow bg, `var(--border)`, `var(--shadow-sm)`, `transition: transform, box-shadow` (CSS handles all animations — no GSAP)
 - **`#darkMode-Btn`**: `color: #000` pinned; `:active` for mobile tap; `:hover` inside `@media (hover: hover)` for desktop
@@ -252,7 +254,7 @@ The project structure exists but all visual implementation is being redone. Trea
 | 7 | About section with timeline | Pending |
 | 8 | Contact section | Done (card layout, 3D title, button icons, pop animation — styled per Penpot) |
 | 9 | Footer | Done |
-| 10 | Responsive desktop adaptation | ⏳ In progress (header done, hero done — projects grid, skills, contact, max-width container pending) |
+| 10 | Responsive desktop adaptation | Done (container max-width 1280px, header gap `--space-8`, projects 3-col grid, skills 4-col grid, contact buttons row) |
 | 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst done, graph paper grid done — remaining sections pending) |
 | 12 | Accessibility pass | Pending |
 | 13 | SEO and meta tags | Pending |
@@ -266,7 +268,7 @@ The project structure exists but all visual implementation is being redone. Trea
 - **Hamburger icon**: currently CSS-styled `<span>` bars — consider replacing with SVG for animated open/close transition
 - **Design tool migration**: now using Penpot MCP server for new designs (contact section onwards). Figma references remain for older sections (hero, projects, skills)
 - **Grid line color**: currently `black` (high contrast, neo-brutalist). Could tone down to `rgba(0,0,0,0.06)` for subtlety — developer's call
-- **Button hover press animation (desktop only)**: `.btn` and `.contact-btn` still need `@media (hover: hover)` wrapping — deferred to desktop pass. Header nav links and `#darkMode-Btn` already done.
+- **Button hover press animation**: `.btn` and `.contact-btn` still need `@media (hover: hover)` wrapping to avoid stuck hover state on touch devices — deferred to accessibility pass.
 - **New tokens added**: `--color-chartreuse: #7acc00` (sparkle fill), `--color-lime: #00ff19` (currently used for sparkle — may consolidate with chartreuse), `--color-sections` (theme-aware bg for hero/skills/footer: `#dcebfe` light / `#20294b` dark), `--color-tagline` (hero tagline text: `#000` light / `#ffffff` dark)
 
 ## Learning Priority
