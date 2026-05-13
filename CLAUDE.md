@@ -108,7 +108,7 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
 
 - Background: `--color-sections` (same as hero, visual continuity; theme-aware)
 - **Card**: `.skills-card` with `--color-emerald` background, 3px black border, `--shadow-md`, **no border-radius** (sharp corners per Figma)
-- **Title**: "SKILLS" with same double-layer 3D text effect via `data-text` attribute — violet front + yellow `::before` offset. Uses `isolation: isolate` on the title to prevent `z-index: -1` from pushing the pseudo-element behind the card background
+- **Title**: "Skills" (`data-text="Skills"`) with same double-layer 3D text effect — violet front + yellow `::before` offset. Uses `isolation: isolate` on the title to prevent `z-index: -1` from pushing the pseudo-element behind the card background
 - **Grid**: `.skills-grid` — `grid-template-columns: repeat(3, 1fr)`, `gap: var(--space-3)`. Desktop: `repeat(4, 1fr)` — 2 rows of 4. `.skills-card` gets `max-width: 1280px; margin-inline: auto` on desktop
 - **Skill items**: square cards (`aspect-ratio: 1`) with cream bg, border, shadow, hover lift effect
 - **Icons**: 6 via Devicon CDN (`<i>` tags), 2 via inline SVG (SQL = database cylinder, REST API = double-arrow) since Devicon doesn't have those
@@ -167,10 +167,11 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
   - Nav shown inline (`display: flex; position: static`) — resets all drawer styles
   - Nav `ul` switches to `flex-direction: row`
   - Nav links styled as neo-brutalist buttons: `border`, `--shadow-sm`, `border-radius: var(--radius-sm)`, `transition`
-  - Colors by `nth-child`: Home=`--color-yellow`, Progetti=`--color-steel`, Skills=`--color-emerald`, Contatti=`--color-blue`
+  - Colors by `nth-child` (5 items): Home=`--color-yellow`, Chi sono=`--color-coral`, Progetti=`--color-steel`, Skills=`--color-emerald`, Contatti=`--color-blue`
   - Hover press animation via `@media (hover: hover)` nested inside desktop breakpoint: `translate(3px, 3px) + box-shadow: none`
   - `.header-brand`: `display: flex; flex: 1; justify-content: center; gap: var(--space-8)` — centers logo+nav in available space, `--space-8` keeps elements grouped without excess spread
   - `#menu-button`: `display: none`
+  - **Drawer bleed fix**: resize listener in `main.js` removes `.is-open` from `navbar` and resets `bottoneMenu` aria when viewport ≥ 1024px — prevents drawer from staying open after resizing from mobile to desktop
 - **`header button` base**: 40×40px, yellow bg, `var(--border)`, `var(--shadow-sm)`, `transition: transform, box-shadow` (CSS handles all animations — no GSAP)
 - **`#darkMode-Btn`**: `color: #000` pinned; `:active` for mobile tap; `:hover` inside `@media (hover: hover)` for desktop
 - **Sun icon** (`id="sun"`, `viewBox="0 0 512 512"`) — shown in light mode
@@ -182,6 +183,11 @@ The design follows **neo-brutalism** principles inspired by [neobrutalism.dev](h
   [data-theme="dark"] #darkMode-Btn #moon { display: block; }
   ```
 - `aria-label="Toggle dark mode"` on the button
+
+### Anchor Scroll Offset
+
+- All sections have `scroll-margin-top: 120px` to prevent the sticky header from covering section titles on anchor navigation
+- Value is per-section (not on `section` globally) because sections have different backgrounds and override `padding` individually
 
 ### Footer
 
@@ -269,7 +275,7 @@ The project structure exists but all visual implementation is being redone. Trea
 | 10 | Responsive desktop adaptation | Done (container max-width 1280px, header gap `--space-8`, projects 3-col grid, skills 4-col grid, contact buttons row) |
 | 11 | GSAP animations (scroll-triggered, micro-interactions) | ⏳ In progress (contact pop-in done, hero starburst done, graph paper grid done — remaining sections pending) |
 | 12 | Accessibility pass | Pending |
-| 13 | SEO and meta tags | Pending |
+| 13 | SEO and meta tags | ⏳ In progress (`noindex, nofollow` meta added while site is in development — remove before going live) |
 | 14 | Final polish | Pending |
 
 ## Open Questions

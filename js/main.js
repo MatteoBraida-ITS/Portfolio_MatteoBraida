@@ -39,7 +39,6 @@ bottoneMenu.addEventListener("pointerleave", () => {
   });
 });
 
-
 // ── Dark Mode ──
 
 function applyTheme(theme) {
@@ -195,4 +194,13 @@ document.querySelectorAll(".project-stack[data-repo]").forEach((stack) => {
       container.style.color = "var(--color-ink)";
       container.style.opacity = "0.6";
     });
+});
+
+// ── Drawer bleeding ──
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 1024) {
+    navbar.classList.remove("is-open");
+    bottoneMenu.setAttribute("aria-expanded", "false");
+  }
 });

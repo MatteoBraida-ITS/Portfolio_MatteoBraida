@@ -135,6 +135,7 @@ header button span {
 #hero {
   background-color: var(--color-sections);
   border-bottom: var(--border);
+  scroll-margin-top: 120px;
 }
 
 .hero-inner {
@@ -267,6 +268,7 @@ header button span {
   background-color: var(--color-bg);
   padding: var(--space-8) var(--space-4);
   border-bottom: var(--border);
+  scroll-margin-top: 120px;
 }
 
 #about .section-title {
@@ -356,6 +358,7 @@ header button span {
 /* ── Projects ── */
 #projects {
   background-color: var(--color-sections);
+  scroll-margin-top: 120px;
 }
 
 #projects .section-title {
@@ -548,6 +551,7 @@ header button span {
   background-color: var(--color-bg);
   padding: var(--space-8) var(--space-4);
   border-bottom: var(--border);
+  scroll-margin-top: 120px;
 }
 
 .skills-card {
@@ -630,6 +634,7 @@ header button span {
   background-color: var(--color-sections);
   padding: var(--space-8) var(--space-4);
   overflow-x: hidden;
+  scroll-margin-top: 120px;
 }
 
 .contact-card {
